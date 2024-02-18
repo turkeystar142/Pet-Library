@@ -1,8 +1,9 @@
 import { DataSource } from '@angular/cdk/collections';
+import { HttpClient } from '@angular/common/http';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
+import { Observable, of as observableOf, merge, BehaviorSubject } from 'rxjs';
 
 // TODO: Replace this with your own data model type
 export interface TableItem {
@@ -10,29 +11,10 @@ export interface TableItem {
   id: number;
 }
 
-// TODO: replace this with real data from your application
-const EXAMPLE_DATA: TableItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
-];
+const FORM_ID = '240437381261048';
+const API_KEY = '10aab04ed94653cc1953f5e4f9406395';
+const BASE_URL = 'https://api.jotform.com/form';
+const COMPILED_URL = BASE_URL.concat('/', FORM_ID, '/submissions?apiKey=', API_KEY);
 
 /**
  * Data source for the Table view. This class should
@@ -40,12 +22,26 @@ const EXAMPLE_DATA: TableItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class TableDataSource extends DataSource<TableItem> {
-  data: TableItem[] = EXAMPLE_DATA;
+  data = new BehaviorSubject<TableItem[]>([]);
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     super();
+    this.http.get<{content: any[]}>(COMPILED_URL).subscribe(response => {
+      const data = response.content.map(item => {
+        return {
+          name: item.answers['7'].answer, // '7' is the key for the 'Pet Name 1' question
+          pet_type: item.answers['8'].answer, // '8' is the key for the 'Pet Type' question
+          breed: item.answers['5'].answer, // '5' is the key for the 'Breed' question
+          pet_color: item.answers['6'].answer, // '6' is the key for the 'Pet Color' question
+          owner_name: item.answers['16'].prettyFormat, // '16' is the key for the 'Owner\'s Name' question
+          id: +item.id, // Convert the id to a number using the unary plus operator
+          location: item.answers['19'].prettyFormat, // '19' is the key for the 'Location' question
+        };
+      });
+      this.data.next(data);
+    });
   }
 
   /**
@@ -54,16 +50,7 @@ export class TableDataSource extends DataSource<TableItem> {
    * @returns A stream of the items to be rendered.
    */
   connect(): Observable<TableItem[]> {
-    if (this.paginator && this.sort) {
-      // Combine everything that affects the rendered data into one update
-      // stream for the data-table to consume.
-      return merge(observableOf(this.data), this.paginator.page, this.sort.sortChange)
-        .pipe(map(() => {
-          return this.getPagedData(this.getSortedData([...this.data ]));
-        }));
-    } else {
-      throw Error('Please set the paginator and sort on the data source before connecting.');
-    }
+    return this.data.asObservable();
   }
 
   /**
@@ -103,6 +90,7 @@ export class TableDataSource extends DataSource<TableItem> {
       }
     });
   }
+
 }
 
 /** Simple sort comparator for example ID/Name columns (for client-side sorting). */
