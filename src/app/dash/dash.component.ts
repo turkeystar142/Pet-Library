@@ -12,6 +12,7 @@ interface Card {
   breed: string;
   pet_color: string;
   location: string;
+  pet_photo: string;
   id: number;
   cols: number;
   rows: number;
@@ -40,6 +41,7 @@ export class DashComponent implements OnInit {
           owner_name: item.answers['16'].prettyFormat, // '16' is the key for the 'Owner\'s Name' question
           id: +item.id, // Convert the id to a number using the unary plus operator
           location: item.answers['19'].prettyFormat, // '19' is the key for the 'Location' question
+          pet_photo: item.answers['28'].answer, // '19' is the key for the 'Location' question
           cols: 1,
           rows: 1
         };
