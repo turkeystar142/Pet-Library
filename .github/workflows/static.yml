@@ -41,12 +41,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          # Target branch for deployment
-          branch: gh-pages
-          # Directory to deploy
-          folder: .docs
-          # Commit message
-          commit_message: Deployed to GitHub Pages
-          # Committer information
-          committer: GitHub <
