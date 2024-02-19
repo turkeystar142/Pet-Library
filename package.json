@@ -6,8 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "deploy": "touch ./output_folder/.nojekyll && gh-pages -d output_folder -t true"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
