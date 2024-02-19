@@ -4,17 +4,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge, BehaviorSubject } from 'rxjs';
+import { COMPILED_URL } from '../app.component';
 
 // TODO: Replace this with your own data model type
 export interface TableItem {
   name: string;
   id: number;
 }
-
-const FORM_ID = '240437381261048';
-const API_KEY = '10aab04ed94653cc1953f5e4f9406395';
-const BASE_URL = 'https://api.jotform.com/form';
-const COMPILED_URL = BASE_URL.concat('/', FORM_ID, '/submissions?apiKey=', API_KEY);
 
 /**
  * Data source for the Table view. This class should
