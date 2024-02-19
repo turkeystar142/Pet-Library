@@ -42,4 +42,11 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          publish_dir: ./docs
+          # Target branch for deployment
+          branch: gh-pages
+          # Directory to deploy
+          folder: .docs
+          # Commit message
+          commit_message: Deployed to GitHub Pages
+          # Committer information
+          committer: GitHub <
