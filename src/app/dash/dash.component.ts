@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { COMPILED_URL } from '../app.component';
+import { LayoutService } from '../layout.service';
 
 interface Card {
   name: string;
@@ -52,7 +53,7 @@ export class DashComponent implements OnInit {
     this.cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
       map(({ matches }) => {
         if (matches) {
-          return this.dataSubject.value.map(card => ({ ...card, cols: 1, rows: 1 }));
+          return this.dataSubject.value.map(card => ({ ...card, cols: 2, rows: 1 }));
         }
 
         return this.dataSubject.value.map(card => ({ ...card, cols: 1, rows: 1 }));
