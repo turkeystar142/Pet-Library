@@ -4,10 +4,9 @@
 
 .dashboard-card {
   position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .more-button {
@@ -18,4 +17,10 @@
 
 .dashboard-card-content {
   text-align: center;
+  overflow: auto;
+}
+
+.card-image {
+  max-width: 45%;
+  height: auto;
 }
