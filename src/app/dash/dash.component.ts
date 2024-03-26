@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -29,7 +29,18 @@ export class DashComponent implements OnInit {
   private http = inject(HttpClient);
   private dataSubject = new BehaviorSubject<Card[]>([]);
   cards!: Observable<Card[]>;
+
+  columns: number = 5;
   
+  constructor() {
+    this.columns = this.getNumberOfColumns();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.columns = this.getNumberOfColumns();
+    console.log(this.columns);
+  }
 
   ngOnInit() {
     this.http.get<{content: any[]}>(COMPILED_URL).subscribe(response => {
@@ -53,13 +64,32 @@ export class DashComponent implements OnInit {
     this.cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
       map(({ matches }) => {
         if (matches) {
-          return this.dataSubject.value.map(card => ({ ...card, cols: 2, rows: 1 }));
+          return this.dataSubject.value.map(card => ({ ...card, cols: 1, rows: 1 }));
         }
-
         return this.dataSubject.value.map(card => ({ ...card, cols: 1, rows: 1 }));
       })
     );
   });
+  }
+
+  getNumberOfColumns(): number {
+    console.log(window.innerWidth);
+    if (window.innerWidth < 800) {
+      return 1;
+    } else if (window.innerWidth < 1000) {
+      return 2;
+    } else if (window.innerWidth < 1200) {
+      return 3;
+    }
+    else if (window.innerWidth < 1500) {
+      return 4;
+    }
+    else if (window.innerWidth < 1700) {
+      return 5;
+    }
+    else  {
+      return 6;
+    }
   }
 
   /** Based on the screen size, switch from standard to one column per row */

@@ -1,6 +1,6 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
+  <mat-grid-list [cols]="columns" rowHeight="350px" gutterSize="20px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <mat-card class="dashboard-card">
         <mat-card-header>
@@ -15,11 +15,11 @@
             </mat-menu>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Owner: {{card.owner_name}}</div> 
-          <div>Pet Type: {{card.pet_type}}</div>
-          <div>Breed: {{card.breed}}</div>
-          <div><img class="card-image" src="{{card.pet_photo}}" alt="Photo of {{card.name}}"></div>
+        <mat-card-content class="dashboard-card-content mat-body-1">
+          <img class="pet-image" mat-card-image src="{{card.pet_photo}}" alt="Photo of {{card.name}}"><br>
+          Owner: {{card.owner_name}}<br>
+          Pet Type: {{card.pet_type}}<br>
+          Breed: {{card.breed}}<br>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
