@@ -1,25 +1,37 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
+  <input (input)="searchTerm.next()" placeholder="Search">
   <mat-grid-list [cols]="columns" rowHeight="350px" gutterSize="20px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card">
+      <mat-card *ngIf="!card.flip" class="dashboard-card" (click)="toggleFlip(card)">
         <mat-card-header>
-          <mat-card-title>
+          <mat-card-title class="pet-name">
             {{card.name}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content mat-body-1">
-          <img class="pet-image" mat-card-image src="{{card.pet_photo}}" alt="Photo of {{card.name}}"><br>
-          Owner: {{card.owner_name}}<br>
-          Pet Type: {{card.pet_type}}<br>
-          Breed: {{card.breed}}<br>
+        <mat-card-content class="dashboard-card-content-front mat-body-1">
+          <img class="pet-image" mat-card-image src="{{card.pet_photo}}" alt="Photo of Pet"><br>
+          <b>Pet Type:</b> {{card.pet_type}}<br>
+          <b>Breed:</b> {{card.breed}}<br>
+        </mat-card-content>
+      </mat-card>
+      <mat-card *ngIf="card.flip" class="dashboard-card" (click)="toggleFlip(card)">
+        <mat-card-header>
+          <mat-card-title class="pet-name">
+            {{card.name}}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content-back mat-body-1">
+          <b>Breed:</b> {{card.breed}}<br>
+          <b>Pet Type:</b> {{card.pet_type}}<br>
+          <b>Pet Color:</b> {{card.pet_color}}<br>
+          <b>Owner:</b> {{card.owner_name}}<br>
+          <b>Phone:</b> {{card.phone}}<br>
+          <b>Email:</b> {{card.email}}<br>
+          <b>Property:</b> {{card.location}}<br>
+          <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
+            <mat-icon>open_in_full</mat-icon>
+          </button>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

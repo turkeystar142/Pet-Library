@@ -44,8 +44,6 @@ export class TableComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.table.dataSource = this.dataSource;
-    //console.log(this.dataSource);
-    //console.log(this.displayedColumns)
   }
 
 }

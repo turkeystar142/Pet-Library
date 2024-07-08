@@ -2,9 +2,9 @@ import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { COMPILED_URL } from '../app.component';
-import { LayoutService } from '../layout.service';
+import { Router } from '@angular/router';
 
 interface Card {
   name: string;
@@ -13,10 +13,13 @@ interface Card {
   breed: string;
   pet_color: string;
   location: string;
+  phone: string;
+  email: string;
   pet_photo: string;
-  id: number;
+  id: string;
   cols: number;
   rows: number;
+  flip: boolean;
 }
 
 @Component({
@@ -31,15 +34,15 @@ export class DashComponent implements OnInit {
   cards!: Observable<Card[]>;
 
   columns: number = 5;
+  searchTerm = new BehaviorSubject<string>('');
   
-  constructor() {
+  constructor(private router: Router) {
     this.columns = this.getNumberOfColumns();
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.columns = this.getNumberOfColumns();
-    console.log(this.columns);
   }
 
   ngOnInit() {
@@ -51,29 +54,34 @@ export class DashComponent implements OnInit {
           breed: item.answers['5'].answer, // '5' is the key for the 'Breed' question
           pet_color: item.answers['6'].answer, // '6' is the key for the 'Pet Color' question
           owner_name: item.answers['16'].prettyFormat, // '16' is the key for the 'Owner\'s Name' question
-          id: +item.id, // Convert the id to a number using the unary plus operator
+          id: item.id, // Convert the id to a number using the unary plus operator
           location: item.answers['19'].prettyFormat, // '19' is the key for the 'Location' question
-          pet_photo: item.answers['28'].answer, // '19' is the key for the 'Location' question
+          pet_photo: item.answers['28'].answer, // '28' is the key for the 'photo' question
+          email: item.answers['22'].answer, // '22' is the key for the 'Email' question
+          phone: item.answers['21'].prettyFormat, // '21' is the key for the 'Phone' question
           cols: 1,
-          rows: 1
+          rows: 1,
+          flip: false
         };
       });
       this.dataSubject.next(data);
     
 
-    this.cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-      map(({ matches }) => {
-        if (matches) {
-          return this.dataSubject.value.map(card => ({ ...card, cols: 1, rows: 1 }));
+    this.cards = combineLatest([ this.breakpointObserver.observe(Breakpoints.Handset), this.searchTerm])
+    .pipe(
+      map(([breakpointState, searchTerm]) => {
+        let cards = this.dataSubject.value.map(card => ({ ...card, cols: 1, rows: 1, flip: false}));
+    
+        if (breakpointState.matches) {
+          cards = cards.map(card => ({ ...card, cols: 1, rows: 1, flip: false}));
         }
-        return this.dataSubject.value.map(card => ({ ...card, cols: 1, rows: 1 }));
-      })
+        return cards.filter(card => card.name.toLowerCase().includes(searchTerm.toLowerCase()));
+      }),
     );
   });
   }
 
   getNumberOfColumns(): number {
-    console.log(window.innerWidth);
     if (window.innerWidth < 800) {
       return 1;
     } else if (window.innerWidth < 1000) {
@@ -92,24 +100,11 @@ export class DashComponent implements OnInit {
     }
   }
 
-  /** Based on the screen size, switch from standard to one column per row */
-  // cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-  //   map(({ matches }) => {
-  //     if (matches) {
-  //       return [
-  //         { title: 'Card 1', cols: 1, rows: 1 },
-  //         { title: 'Card 2', cols: 1, rows: 1 },
-  //         { title: 'Card 3', cols: 1, rows: 1 },
-  //         { title: 'Card 4', cols: 1, rows: 1 }
-  //       ];
-  //     }
+  goToPetPage(id: string) {
+    this.router.navigate(['/pet', id]);
+  }
 
-  //     return [
-  //       { title: 'Card 1', cols: 1, rows: 1 },
-  //       { title: 'Card 2', cols: 1, rows: 1 },
-  //       { title: 'Card 3', cols: 1, rows: 1 },
-  //       { title: 'Card 4', cols: 1, rows: 1 }
-  //     ];
-  //   })
-  // );
+  toggleFlip(card: any) {
+    card.flip = !card.flip;
+  }
 }

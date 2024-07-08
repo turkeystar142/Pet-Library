@@ -1,0 +1,52 @@
+.grid-container {
+    margin: 20px;
+}
+
+.back-button {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 20;
+}
+
+.large-screen {
+  .pet-image {
+      max-width: 600px;
+      height: 600px;
+  }
+  .dashboard-card {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    display: flex;
+    width: 625px;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .mat-grid-tile {
+    overflow: visible;
+    height: 600px;
+  }
+}
+  
+.small-screen {
+  .pet-image {
+      max-width: 325px;
+      height: 350px;
+  }
+  .dashboard-card {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    display: flex;
+    width: 350px;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .mat-grid-tile {
+    overflow: visible;
+    height: 600px;
+  }
+}

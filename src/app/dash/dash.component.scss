@@ -5,24 +5,42 @@
 .dashboard-card {
   position: absolute;
   display: flex;
-  
+  min-width: 232px;
   flex-direction: column;
   height: 100%;
 }
 
 .more-button {
   position: absolute;
-  top: 5px;
+  bottom: 10px;
   right: 10px;
 }
 
-.dashboard-card-content {
+.dashboard-card-content-front {
   text-align: center;
-  overflow: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px;
+}
+
+.dashboard-card-content-back {
+  margin-top: 20px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px;
+}
+
+.pet-name {
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .pet-image {
   max-width: 200px;
+  height: 200px;
 }
 
 .mat-grid-tile {

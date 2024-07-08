@@ -21,12 +21,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { DashComponent } from './dash/dash.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu'; 
+import { MatMenuModule } from '@angular/material/menu';
+import { PetPageComponent } from './pet-page/pet-page.component'; 
+import { FormsModule } from '@angular/forms';
 
 // Routing Definitions
 const routes: Routes = [
   { path: 'dash', component: DashComponent },
   { path: 'table', component: TableComponent },
+  { path: 'pet/:id', component: PetPageComponent },
   { path: '', redirectTo: '/dash', pathMatch: 'full' }, // redirect empty path to '/about'
   { path: '**', redirectTo: '/dash' }, // wildcard route back home
   // more routes here
@@ -37,12 +40,14 @@ const routes: Routes = [
     AppComponent,
     NavigationComponent,
     TableComponent,
-    DashComponent
+    DashComponent,
+    PetPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
     // Material Components

@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
+  <!-- <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(layoutService.isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(layoutService.isHandset$ | async) ? 'over' : 'side'"
       [opened]="(layoutService.isHandset$ | async) === false">
@@ -7,17 +7,17 @@
     <mat-nav-list class="navbar-items">
       <a mat-list-item *ngFor="let item of navItems" [routerLink]="[item.route]">{{ item.name }}</a>
     </mat-nav-list>
-  </mat-sidenav>
+  </mat-sidenav> -->
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
+    <mat-toolbar class="toolbar-title" color="primary">
+      <!-- <button
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
         *ngIf="layoutService.isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
+      </button> -->
       <span>{{title}}</span>
     </mat-toolbar>
     <!-- Add Content Here -->
