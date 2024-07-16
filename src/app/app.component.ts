@@ -21,8 +21,8 @@ export class AppComponent {
     );
 }
 
-const FORM_ID = '240437381261048';
-export const API_KEY = '10aab04ed94653cc1953f5e4f9406395';
+const FORM_ID = '230875653758066';
+export const API_KEY = '0711cf08a9cdf2358d054fe59496e830';
 export const BASE_URL_FORM = 'https://api.jotform.com/form';
 export const BASE_URL_SUBMISSION = 'https://api.jotform.com/submission';
 export const COMPILED_URL = BASE_URL_FORM.concat('/', FORM_ID, '/submissions?apiKey=', API_KEY);

@@ -1,6 +1,8 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
-  <input (input)="searchTerm.next()" placeholder="Search">
+  <mat-form-field class="search-input">
+    <input matInput (input)="onInput($event)" type="text" placeholder="Search by name, owner, breed...">
+  </mat-form-field>
   <mat-grid-list [cols]="columns" rowHeight="350px" gutterSize="20px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <mat-card *ngIf="!card.flip" class="dashboard-card" (click)="toggleFlip(card)">
@@ -10,9 +12,12 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content-front mat-body-1">
-          <img class="pet-image" mat-card-image src="{{card.pet_photo}}" alt="Photo of Pet"><br>
+          <img  class="pet-image" mat-card-image src="{{card.pet_photo}}" alt="Pet Photo"><br>
           <b>Pet Type:</b> {{card.pet_type}}<br>
           <b>Breed:</b> {{card.breed}}<br>
+          <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
+            <mat-icon>open_in_full</mat-icon>
+          </button>
         </mat-card-content>
       </mat-card>
       <mat-card *ngIf="card.flip" class="dashboard-card" (click)="toggleFlip(card)">
