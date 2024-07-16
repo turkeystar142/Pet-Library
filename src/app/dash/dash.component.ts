@@ -69,20 +69,32 @@ export class DashComponent implements OnInit {
     
 
     this.cards = combineLatest([ this.breakpointObserver.observe(Breakpoints.Handset), this.searchTerm])
-    .pipe(
-      map(([breakpointState, searchTerm]) => {
-        let cards = this.dataSubject.value.map(card => ({ ...card, cols: 1, rows: 1, flip: false}));
-    
-        if (breakpointState.matches) {
-          cards = cards.map(card => ({ ...card, cols: 1, rows: 1, flip: false}));
-        }
-        return cards.filter(card => card.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                            card.breed.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                            card.owner_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            card.pet_color.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            card.phone.toLowerCase().includes(searchTerm.toLowerCase()));
+      .pipe(
+        map(([breakpointState, searchTerm]) => {
+          let cards = this.dataSubject.value.map(card => ({ ...card, cols: 1, rows: 1, flip: false}));
+        
+          if (breakpointState.matches) {
+            cards = cards.map(card => ({ ...card, cols: 1, rows: 1, flip: false}));
+          }
+          
+          const searchTermLower = searchTerm.toLowerCase();
+
+        // Filter cards based on the search term
+        cards = cards.filter(card =>
+          card.name.toLowerCase().includes(searchTermLower) ||
+          card.breed.toLowerCase().includes(searchTermLower) ||
+          card.owner_name.toLowerCase().includes(searchTermLower) ||
+          card.pet_color.toLowerCase().includes(searchTermLower) ||
+          card.phone.toLowerCase().includes(searchTermLower)
+        );
+
+        // Sort cards by name in alphabetical order
+        cards.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+
+        return cards;
       }),
     );
+
   });
   }
 
