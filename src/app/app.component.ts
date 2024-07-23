@@ -25,4 +25,4 @@ const FORM_ID = environment.formId;
 export const API_KEY = environment.apiKey;
 export const BASE_URL_FORM = 'https://api.jotform.com/form';
 export const BASE_URL_SUBMISSION = 'https://api.jotform.com/submission';
-export const COMPILED_URL = BASE_URL_FORM.concat('/', FORM_ID, '/submissions?apiKey=', API_KEY, "&limit=1000");
+export const COMPILED_URL = BASE_URL_FORM.concat('/', FORM_ID, '/submissions?apiKey=', API_KEY, "&limit=500");

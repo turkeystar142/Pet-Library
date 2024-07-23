@@ -60,16 +60,16 @@ onResize(event: Event) {
     this.http.get<{content: any}>(this.COMPILED_URL_SUBMISSION).subscribe(response => {
       const item = response.content;
         const data: Pet = {
-          name: item.answers['23'].answer, // '7' is the key for the 'Pet Name 1' question
-          pet_type: item.answers['7'].answer, // '8' is the key for the 'Pet Type' question
-          breed: item.answers['9'].answer, // '5' is the key for the 'Breed' question
-          pet_color: item.answers['20'].answer, // '6' is the key for the 'Pet Color' question
-          owner_name: item.answers['4'].prettyFormat, // '16' is the key for the 'Owner\'s Name' question
-          id: item.id, // Convert the id to a number using the unary plus operator
-          location: item.answers['3'].prettyFormat, // '19' is the key for the 'Location' question
-          pet_photo: item.answers['19'].answer[0] ? item.answers['19'].answer[0]: this.placeholderImage, // '28' is the key for the 'photo' question
-          email: item.answers['5'].answer, // '22' is the key for the 'Email' question
-          phone: item.answers['6'].prettyFormat, // '21' is the key for the 'Phone' question
+          name: item?.answers?.['23']?.answer ? item?.answers?.['23']?.answer : "N/A", // '23' is the key for the 'Pet Name 1' question
+          pet_type: item?.answers?.['7']?.answer ? item?.answers?.['7']?.answer : "N/A", // '7' is the key for the 'Pet Type' question
+          breed: item?.answers?.['9']?.answer ? item?.answers?.['9']?.answer : "N/A", // '9' is the key for the 'Breed' question
+          pet_color: item?.answers?.['20']?.answer ? item?.answers?.['20']?.answer : "N/A", // '20' is the key for the 'Pet Color' question
+          owner_name: item?.answers?.['4']?.prettyFormat ? item?.answers?.['44']?.answer : "N/A", // '4' is the key for the 'Owner\'s Name' question
+          id: item?.id ? item?.id : "0", // 
+          location: item?.answers?.['3']?.prettyFormat ? item?.answers?.['3']?.answer : "N/A", // '3' is the key for the 'Location' question
+          pet_photo: item?.answers?.['19']?.answer[0] ? item.answers?.['19']?.answer[0] : this.placeholderImage, // '19' is the key for the 'photo' question
+          email: item?.answers?.['5']?.answer ? item?.answers?.['5']?.answer : "N/A", // '5' is the key for the 'Email' question
+          phone: item?.answers?.['6']?.prettyFormat ? item?.answers?.['6']?.answer : "N/A", // '6' is the key for the 'Phone' question
         };
         this.dataSubject.next(data);
       });
