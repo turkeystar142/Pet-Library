@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'dash', component: DashComponent },
   { path: 'table', component: TableComponent },
   { path: 'pet/:id', component: PetPageComponent },
-  { path: '', redirectTo: '/dash', pathMatch: 'full' }, // redirect empty path to '/about'
+  { path: '', redirectTo: '/dash', pathMatch: 'full' }, // redirect empty path to '/dash'
   { path: '**', redirectTo: '/dash' }, // wildcard route back home
   // more routes here
 ];
