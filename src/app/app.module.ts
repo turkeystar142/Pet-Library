@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 // Importing Angular Material Components
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -53,6 +54,7 @@ const routes: Routes = [
         FormsModule,
         LazyLoadImageModule,
         RouterModule.forRoot(routes, { useHash: true }),
+        ServiceWorkerModule.register('ngsw-worker.js', {}),
         // Material Components
         MatToolbarModule,
         MatButtonModule,
