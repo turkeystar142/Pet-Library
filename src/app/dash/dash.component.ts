@@ -85,7 +85,8 @@ export class DashComponent implements OnInit {
           card.breed.toLowerCase().includes(searchTermLower) ||
           card.owner_name.toLowerCase().includes(searchTermLower) ||
           card.pet_color.toLowerCase().includes(searchTermLower) ||
-          card.phone.toLowerCase().includes(searchTermLower)
+          card.phone.toLowerCase().includes(searchTermLower) ||
+          card.location.toLowerCase().includes(searchTermLower)
         );
 
         // Sort cards by name in alphabetical order
