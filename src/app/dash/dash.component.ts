@@ -66,7 +66,6 @@ export class DashComponent implements OnInit {
         };
         
       });
-      console.log(data);
       this.dataSubject.next(data);
     
 
