@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -67,7 +67,13 @@ const routes: Routes = [
         MatGridListModule,
         MatCardModule,
         MatMenuModule,
-        MatInputModule], 
+        MatInputModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: !isDevMode(),
+          // Register the ServiceWorker as soon as the application is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
+        })], 
         providers: [
           provideHttpClient(withInterceptorsFromDi()),
           { provide: LocationStrategy, useClass: HashLocationStrategy }
