@@ -25,6 +25,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { PetPageComponent } from './pet-page/pet-page.component'; 
 import { FormsModule } from '@angular/forms';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 // Routing Definitions
 const routes: Routes = [
@@ -61,5 +62,9 @@ const routes: Routes = [
         MatGridListModule,
         MatCardModule,
         MatMenuModule,
-        MatInputModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        MatInputModule], 
+        providers: [
+          provideHttpClient(withInterceptorsFromDi()),
+          { provide: LocationStrategy, useClass: HashLocationStrategy }
+        ], })
 export class AppModule { }
