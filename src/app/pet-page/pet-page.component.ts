@@ -34,8 +34,6 @@ export class PetPageComponent {
     // Define the property at the class level
     COMPILED_URL_SUBMISSION!: string;
   columns: number = 2;
-  
-  placeholderImage = 'src/assets/image-404.png';
 
 constructor(private activeRoute: ActivatedRoute, private router: Router) { 
   this.columns = this.getNumberOfColumns();

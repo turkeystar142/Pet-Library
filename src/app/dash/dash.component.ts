@@ -32,7 +32,6 @@ export class DashComponent implements OnInit {
   private http = inject(HttpClient);
   private dataSubject = new BehaviorSubject<Card[]>([]);
   cards!: Observable<Card[]>;
-  placeholderImage = 'src/assets/image-404.png';
 
   columns: number = 5;
   searchTerm = new BehaviorSubject<string>('');
