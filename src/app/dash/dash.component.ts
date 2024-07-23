@@ -50,21 +50,23 @@ export class DashComponent implements OnInit {
     this.http.get<{content: any[]}>(COMPILED_URL).subscribe(response => {
       const data = response.content.map(item => {
         return {
-          name: item.answers?.['23']?.answer, // '23' is the key for the 'Pet Name 1' question
-          pet_type: item.answers?.['7']?.answer, // '7' is the key for the 'Pet Type' question
-          breed: item.answers?.['9']?.answer, // '9' is the key for the 'Breed' question
-          pet_color: item.answers?.['20']?.answer, // '20' is the key for the 'Pet Color' question
-          owner_name: item.answers?.['4']?.prettyFormat, // '4' is the key for the 'Owner\'s Name' question
-          id: item.id, // Convert the id to a number using the unary plus operator
-          location: item.answers?.['3']?.prettyFormat, // '3' is the key for the 'Location' question
-          pet_photo: item.answers?.['19']?.answer[0] ? item.answers?.['19']?.answer[0]: this.placeholderImage, // '19' is the key for the 'photo' question
-          email: item.answers?.['5']?.answer, // '5' is the key for the 'Email' question
-          phone: item.answers?.['6']?.prettyFormat, // '6' is the key for the 'Phone' question
+          name: item?.answers?.['23']?.answer ? item?.answers?.['23']?.answer : "N/A", // '23' is the key for the 'Pet Name 1' question
+          pet_type: item?.answers?.['7']?.answer ? item?.answers?.['23']?.answer : "N/A", // '7' is the key for the 'Pet Type' question
+          breed: item?.answers?.['9']?.answer ? item?.answers?.['23']?.answer : "N/A", // '9' is the key for the 'Breed' question
+          pet_color: item?.answers?.['20']?.answer ? item?.answers?.['23']?.answer : "N/A", // '20' is the key for the 'Pet Color' question
+          owner_name: item?.answers?.['4']?.prettyFormat ? item?.answers?.['23']?.answer : "N/A", // '4' is the key for the 'Owner\'s Name' question
+          id: item?.id ? item?.answers?.['23']?.answer : "0", // 
+          location: item?.answers?.['3']?.prettyFormat ? item?.answers?.['23']?.answer : "N/A", // '3' is the key for the 'Location' question
+          pet_photo: item?.answers?.['19']?.answer[0] ? item.answers?.['19']?.answer[0] : this.placeholderImage, // '19' is the key for the 'photo' question
+          email: item?.answers?.['5']?.answer ? item?.answers?.['23']?.answer : "N/A", // '5' is the key for the 'Email' question
+          phone: item?.answers?.['6']?.prettyFormat ? item?.answers?.['23']?.answer : "N/A", // '6' is the key for the 'Phone' question
           cols: 1,
           rows: 1,
           flip: false
         };
+        
       });
+      console.log(data);
       this.dataSubject.next(data);
     
 
