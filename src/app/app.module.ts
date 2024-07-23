@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 // Importing Angular Material Components
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -45,10 +46,12 @@ const routes: Routes = [
         PetPageComponent
     ],
     exports: [RouterModule],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+    bootstrap: [AppComponent], 
+    imports: [BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         FormsModule,
+        LazyLoadImageModule,
         RouterModule.forRoot(routes, { useHash: true }),
         // Material Components
         MatToolbarModule,
