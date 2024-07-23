@@ -49,7 +49,7 @@ const routes: Routes = [
         AppRoutingModule,
         BrowserAnimationsModule,
         FormsModule,
-        RouterModule.forRoot(routes),
+        RouterModule.forRoot(routes, { useHash: true }),
         // Material Components
         MatToolbarModule,
         MatButtonModule,
