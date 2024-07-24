@@ -56,7 +56,7 @@ export class DashComponent implements OnInit {
           owner_name: item?.answers?.['4']?.prettyFormat ? item?.answers?.['4']?.prettyFormat : "N/A", // '4' is the key for the 'Owner\'s Name' question
           id: item?.id ? item?.id : "0", // 
           location: item?.answers?.['3']?.prettyFormat ? item?.answers?.['3']?.prettyFormat : "N/A", // '3' is the key for the 'Location' question
-          pet_photo: item?.answers?.['19']?.answer[0], // '19' is the key for the 'photo' question
+          pet_photo: item?.answers?.['19']?.answer[0].lazyload, // '19' is the key for the 'photo' question
           email: item?.answers?.['5']?.answer ? item?.answers?.['5']?.answer : "N/A", // '5' is the key for the 'Email' question
           phone: item?.answers?.['6']?.prettyFormat ? item?.answers?.['6']?.prettyFormat : "N/A", // '6' is the key for the 'Phone' question
           cols: 1,
