@@ -41,5 +41,5 @@
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
-  <mat-paginator [length]="totalCards" [pageSize]="pageSize" (page)="onPageChange($event)"></mat-paginator>
+  <mat-paginator [length]="totalCards" [pageSize]="pageSize" [pageSizeOptions]="[10, 20, 50]" (page)="onPageChange($event)"></mat-paginator>
 </div>

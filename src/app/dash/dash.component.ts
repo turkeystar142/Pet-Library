@@ -42,7 +42,7 @@ export class DashComponent implements OnInit {
 
   cards!: Observable<Card[]>;
   paginatedCards!: Observable<Card[]>;
-  pageSize = new BehaviorSubject<number>(2);
+  pageSize = new BehaviorSubject<number>(10);
   totalCards = 0;
   columns: number = 5;
 
@@ -138,6 +138,21 @@ export class DashComponent implements OnInit {
   onPageChange(event: PageEvent) {
     this.pageIndex.next(event.pageIndex);
     this.pageSize.next(event.pageSize);
+    this.paginateCards();
+  }
+
+  paginateCards() {
+    this.paginatedCards = combineLatest([
+      this.cards,
+      this.pageIndex,
+      this.pageSize
+    ]).pipe(
+      map(([cards, pageIndex, pageSize]) => {
+        const startIndex = pageIndex * pageSize;
+        const endIndex = startIndex + pageSize;
+        return cards.slice(startIndex, endIndex);
+      })
+    );
   }
 
   getNumberOfColumns(): number {
