@@ -4,7 +4,7 @@
     <input matInput (input)="onInput($event)" type="text" placeholder="Search by name, owner, breed...">
   </mat-form-field>
   <mat-grid-list [cols]="columns" rowHeight="350px" gutterSize="20px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+    <mat-grid-tile *ngFor="let card of paginatedCards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <mat-card *ngIf="!card.flip" class="dashboard-card" (click)="toggleFlip(card)">
         <mat-card-header>
           <mat-card-title class="pet-name">
@@ -41,4 +41,5 @@
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
+  <mat-paginator [length]="totalCards" [pageSize]="pageSize" (page)="onPageChange($event)"></mat-paginator>
 </div>

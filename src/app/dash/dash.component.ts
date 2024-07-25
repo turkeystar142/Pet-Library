@@ -38,11 +38,11 @@ export class DashComponent implements OnInit {
   private http = inject(HttpClient);
   private dataSubject = new BehaviorSubject<Card[]>([]);
   private pageIndex = new BehaviorSubject<number>(0);
-  private pageSize = new BehaviorSubject<number>(12);
   private searchTerm = new BehaviorSubject<string>('');
 
   cards!: Observable<Card[]>;
   paginatedCards!: Observable<Card[]>;
+  pageSize = new BehaviorSubject<number>(12);
   totalCards = 0;
   columns: number = 5;
 
