@@ -42,7 +42,7 @@ export class DashComponent implements OnInit {
 
   cards!: Observable<Card[]>;
   paginatedCards!: Observable<Card[]>;
-  pageSize = new BehaviorSubject<number>(12);
+  pageSize = new BehaviorSubject<number>(2);
   totalCards = 0;
   columns: number = 5;
 
