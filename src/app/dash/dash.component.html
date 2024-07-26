@@ -8,16 +8,16 @@
       <mat-card *ngIf="!card.flip" class="dashboard-card" (click)="toggleFlip(card)">
         <mat-card-header>
           <mat-card-title class="pet-name">
-            {{card.name}} {{ card.name2 ? ' & ' + card.name2 : '' }}
+            {{card.name}} {{ !(card.name2.includes("N/A")) ? ' & ' + card.name2 : '' }}
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content-front mat-body-1">
           <img [lazyLoad]="card.pet_photo" class="pet-image" mat-card-image alt="Pet Photo"><br>
-          <img *ngIf="card.name2" [lazyLoad]="card.pet_photo2" class="pet-image" mat-card-image alt="Other Pet Photo"><br>
+          <img *ngIf="!card.name2.includes('N/A')" [lazyLoad]="card.pet_photo2" class="pet-image" mat-card-image alt="Other Pet Photo"><br>
           <b>Pet Type:</b> {{card.pet_type}}<br>
-          <b *ngIf="card.name2">Other Type:</b> {{card.pet_type2}}<br>
+          <b *ngIf="!card.name2.includes('N/A')">Other Type:</b> {{card.pet_type2}}<br>
           <b>Breed:</b> {{card.breed}}<br>
-          <b *ngIf="card.name2">Other Breed:</b> {{card.breed2}}<br>
+          <b *ngIf="!card.name2.includes('N/A')">Other Breed:</b> {{card.breed2}}<br>
           <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
             <mat-icon>open_in_full</mat-icon>
           </button>
@@ -26,16 +26,16 @@
       <mat-card *ngIf="card.flip" class="dashboard-card" (click)="toggleFlip(card)">
         <mat-card-header>
           <mat-card-title class="pet-name">
-            {{card.name}} {{ card.name2 ? ' & ' + card.name2 : '' }}
+            {{card.name}} {{ !(card.name2.includes("N/A")) ? ' & ' + card.name2 : '' }}
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content-back mat-body-1">
           <b>Breed:</b> {{card.breed}}<br>
-          <b *ngIf="card.name2">Other Breed:</b> {{card.breed2}}<br>
+          <b *ngIf="!card.name2.includes('N/A')">Other Breed:</b> {{card.breed2}}<br>
           <b>Pet Type:</b> {{card.pet_type}}<br>
-          <b *ngIf="card.name2">Other Type:</b> {{card.pet_type2}}<br>
+          <b *ngIf="!card.name2.includes('N/A')">Other Type:</b> {{card.pet_type2}}<br>
           <b>Pet Color:</b> {{card.pet_color}}<br>
-          <b *ngIf="card.name2">Other Pet Color:</b> {{card.pet_color2}}<br>
+          <b *ngIf="!card.name2.includes('N/A')">Other Pet Color:</b> {{card.pet_color2}}<br>
           <b>Owner:</b> {{card.owner_name}}<br>
           <b>Phone:</b> {{card.phone}}<br>
           <b>Email:</b> {{card.email}}<br>
