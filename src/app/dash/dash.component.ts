@@ -62,11 +62,11 @@ export class DashComponent implements OnInit {
           name: item?.answers?.['23']?.answer ? item?.answers?.['23']?.answer : "N/A", // '23' is the key for the 'Pet Name 1' question
           name2: item?.answers?.['24']?.answer ? item?.answers?.['24']?.answer : "N/A", // '24' is the key for the 'Pet Name 2' question
           pet_type: item?.answers?.['7']?.answer ? item?.answers?.['7']?.answer : "N/A", // '7' is the key for the 'Pet Type' question
-          pet_type2: item?.answers?.['13']?.answer ? item?.answers?.['13']?.answer : "N/A", // '13' is the key for the 'Pet Type 2' question
+          pet_type2: item?.answers?.['13']?.answer ? item?.answers?.['13']?.answer : null, // '13' is the key for the 'Pet Type 2' question
           breed: item?.answers?.['9']?.answer ? item?.answers?.['9']?.answer : "N/A", // '9' is the key for the 'Breed' question
-          breed2: item?.answers?.['14']?.answer ? item?.answers?.['14']?.answer : "N/A", // '14' is the key for the 'Breed2' question
+          breed2: item?.answers?.['14']?.answer ? item?.answers?.['14']?.answer : null, // '14' is the key for the 'Breed2' question
           pet_color: item?.answers?.['20']?.answer ? item?.answers?.['20']?.answer : "N/A", // '20' is the key for the 'Pet Color' question
-          pet_color2: item?.answers?.['21']?.answer ? item?.answers?.['21']?.answer : "N/A", // '21' is the key for the 'Pet Color2' question
+          pet_color2: item?.answers?.['21']?.answer ? item?.answers?.['21']?.answer : null, // '21' is the key for the 'Pet Color2' question
           owner_name: item?.answers?.['4']?.prettyFormat ? item?.answers?.['4']?.prettyFormat : "N/A", // '4' is the key for the 'Owner\'s Name' question
           id: item?.id ? item?.id : "0", // 
           location: item?.answers?.['3']?.prettyFormat ? item?.answers?.['3']?.prettyFormat : "N/A", // '3' is the key for the 'Location' question
