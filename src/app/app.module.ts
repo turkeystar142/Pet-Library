@@ -54,7 +54,6 @@ const routes: Routes = [
         FormsModule,
         LazyLoadImageModule,
         RouterModule.forRoot(routes, { useHash: true }),
-        ServiceWorkerModule.register('ngsw-worker.js', {}),
         // Material Components
         MatToolbarModule,
         MatButtonModule,
@@ -68,6 +67,7 @@ const routes: Routes = [
         MatCardModule,
         MatMenuModule,
         MatInputModule,
+        // Service Worker for Cache
         ServiceWorkerModule.register('ngsw-worker.js', {
           enabled: true,
           // Register the ServiceWorker as soon as the application is stable
