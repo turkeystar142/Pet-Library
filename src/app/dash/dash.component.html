@@ -4,82 +4,91 @@
     <input matInput (input)="onInput($event)" type="text" placeholder="Search by name, owner, breed...">
   </mat-form-field>
   <mat-grid-list [cols]="columns" rowHeight="350px" gutterSize="20px">
-    <mat-grid-tile *ngFor="let card of paginatedCards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <div class="card-container">
-        <div class="first-pet">
-          <mat-card *ngIf="!card.flip" class="dashboard-card" (click)="toggleFlip(card)">
-            <mat-card-header>
-              <mat-card-title class="pet-name">
-                {{card.name}}
-              </mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="dashboard-card-content-front mat-body-1">
-              <img [lazyLoad]="card.pet_photo" class="pet-image" mat-card-image alt="Pet Photo"> <br>
-              <b>Pet Type:</b> {{card.pet_type}}<br>
-              <b>Breed:</b> {{card.breed}}<br>
-              <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
-                <mat-icon>open_in_full</mat-icon>
-              </button>
-            </mat-card-content>
-          </mat-card>
-          <mat-card *ngIf="card.flip" class="dashboard-card" (click)="toggleFlip(card)">
-            <mat-card-header>
-              <mat-card-title class="pet-name">
-                {{card.name}}
-              </mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="dashboard-card-content-back mat-body-1">
-              <b>Breed:</b> {{card.breed}}<br>
-              <b>Pet Type:</b> {{card.pet_type}}<br>
-              <b>Pet Color:</b> {{card.pet_color}}<br>
-              <b>Owner:</b> {{card.owner_name}}<br>
-              <b>Phone:</b> {{card.phone}}<br>
-              <b>Email:</b> {{card.email}}<br>
-              <b>Property:</b> {{card.location}}<br>
-              <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
-                <mat-icon>open_in_full</mat-icon>
-              </button>
-            </mat-card-content>
-          </mat-card>
+    <ng-container *ngFor="let card of paginatedCards | async">
+      <!-- First Pet Card -->
+      <mat-grid-tile [colspan]="card.cols" [rowspan]="card.rows">
+        <div class="card-container">
+          <div class="first-pet">
+            <mat-card *ngIf="!card.flip" class="dashboard-card" (click)="toggleFlip(card)">
+              <mat-card-header>
+                <mat-card-title class="pet-name">
+                  {{card.name}}
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content class="dashboard-card-content-front mat-body-1">
+                <img [lazyLoad]="card.pet_photo" class="pet-image" mat-card-image alt="Pet Photo"> <br>
+                <b>Pet Type:</b> {{card.pet_type}}<br>
+                <b>Breed:</b> {{card.breed}}<br>
+                <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
+                  <mat-icon>open_in_full</mat-icon>
+                </button>
+              </mat-card-content>
+            </mat-card>
+            <mat-card *ngIf="card.flip" class="dashboard-card" (click)="toggleFlip(card)">
+              <mat-card-header>
+                <mat-card-title class="pet-name">
+                  {{card.name}}
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content class="dashboard-card-content-back mat-body-1">
+                <b>Breed:</b> {{card.breed}}<br>
+                <b>Pet Type:</b> {{card.pet_type}}<br>
+                <b>Pet Color:</b> {{card.pet_color}}<br>
+                <b>Owner:</b> {{card.owner_name}}<br>
+                <b>Phone:</b> {{card.phone}}<br>
+                <b>Email:</b> {{card.email}}<br>
+                <b>Property:</b> {{card.location}}<br>
+                <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
+                  <mat-icon>open_in_full</mat-icon>
+                </button>
+              </mat-card-content>
+            </mat-card>
+          </div>
         </div>
-        <div *ngIf="!card.name2.includes('N/A')" class="second-pet">
-          <mat-card *ngIf="!card.flip" class="dashboard-card" (click)="toggleFlip(card)">
-            <mat-card-header>
-              <mat-card-title class="pet-name">
-                {{card.name2}}
-              </mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="dashboard-card-content-front mat-body-1">
-              <img [lazyLoad]="card.pet_photo2" class="pet-image" mat-card-image alt="Pet Photo"> <br>
-              <b>Pet Type:</b> {{card.pet_type2}}<br>
-              <b>Breed:</b> {{card.breed2}}<br>
-              <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
-                <mat-icon>open_in_full</mat-icon>
-              </button>
-            </mat-card-content>
-          </mat-card>
-          <mat-card *ngIf="card.flip" class="dashboard-card" (click)="toggleFlip(card)">
-            <mat-card-header>
-              <mat-card-title class="pet-name">
-                {{card.name2}}
-              </mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="dashboard-card-content-back mat-body-1">
-              <b>Breed:</b> {{card.breed2}}<br>
-              <b>Pet Type:</b> {{card.pet_type2}}<br>
-              <b>Pet Color:</b> {{card.pet_color2}}<br>
-              <b>Owner:</b> {{card.owner_name}}<br>
-              <b>Phone:</b> {{card.phone}}<br>
-              <b>Email:</b> {{card.email}}<br>
-              <b>Property:</b> {{card.location}}<br>
-              <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
-                <mat-icon>open_in_full</mat-icon>
-              </button>
-            </mat-card-content>
-          </mat-card>
-        </div>
-    </div>
-    </mat-grid-tile>
+      </mat-grid-tile>
+    
+          <!-- Second Pet Card, if exists -->
+      <ng-container *ngIf="!card.name2.includes('N/A')">
+        <mat-grid-tile [colspan]="card.cols" [rowspan]="card.rows">
+          <div class="second-pet">
+            <mat-card *ngIf="!card.flip" class="dashboard-card" (click)="toggleFlip(card)">
+              <mat-card-header>
+                <mat-card-title class="pet-name">
+                  {{card.name2}}
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content class="dashboard-card-content-front mat-body-1">
+                <img [lazyLoad]="card.pet_photo2" class="pet-image" mat-card-image alt="Pet Photo"> <br>
+                <b>Pet Type:</b> {{card.pet_type2}}<br>
+                <b>Breed:</b> {{card.breed2}}<br>
+                <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
+                  <mat-icon>open_in_full</mat-icon>
+                </button>
+              </mat-card-content>
+            </mat-card>
+            <mat-card *ngIf="card.flip" class="dashboard-card" (click)="toggleFlip(card)">
+              <mat-card-header>
+                <mat-card-title class="pet-name">
+                  {{card.name2}}
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content class="dashboard-card-content-back mat-body-1">
+                <b>Breed:</b> {{card.breed2}}<br>
+                <b>Pet Type:</b> {{card.pet_type2}}<br>
+                <b>Pet Color:</b> {{card.pet_color2}}<br>
+                <b>Owner:</b> {{card.owner_name}}<br>
+                <b>Phone:</b> {{card.phone}}<br>
+                <b>Email:</b> {{card.email}}<br>
+                <b>Property:</b> {{card.location}}<br>
+                <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
+                  <mat-icon>open_in_full</mat-icon>
+                </button>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-grid-tile>
+      </ng-container>
+    </ng-container>
   </mat-grid-list>
   <mat-paginator [length]="totalCards" [pageSize]="pageSize" [pageSizeOptions]="[10, 20, 50]" (page)="onPageChange($event)"></mat-paginator>
 </div>
