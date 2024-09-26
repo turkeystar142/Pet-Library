@@ -12,8 +12,11 @@
   flex: 1; /* Ensures both cards take up equal space */
 }
 
+.mat-grid-tile-content {
+  align-items: unset; /* Removes the align-items property for double-pet entries*/
+}
+
 .dashboard-card {
-  position: absolute;
   min-width: 232px;
   flex-direction: column;
   height: 100%;
