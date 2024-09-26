@@ -5,6 +5,7 @@
   </mat-form-field>
   <mat-grid-list [cols]="columns" rowHeight="350px" gutterSize="20px">
     <mat-grid-tile *ngFor="let card of paginatedCards | async" [colspan]="card.cols" [rowspan]="card.rows">
+      <div class="card-container">
       <mat-card *ngIf="!card.flip" class="dashboard-card" (click)="toggleFlip(card)">
         <mat-card-header>
           <mat-card-title class="pet-name">
@@ -81,6 +82,7 @@
           </mat-card-content>
         </mat-card>
       </div>
+    </div>
     </mat-grid-tile>
   </mat-grid-list>
   <mat-paginator [length]="totalCards" [pageSize]="pageSize" [pageSizeOptions]="[10, 20, 50]" (page)="onPageChange($event)"></mat-paginator>
