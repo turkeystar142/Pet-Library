@@ -19,7 +19,7 @@
                 <img [lazyLoad]="card.pet_photo" class="pet-image" mat-card-image alt="Pet Photo"> <br>
                 <b>Pet Type:</b> {{card.pet_type}}<br>
                 <b>Breed:</b> {{card.breed}}<br>
-                <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id, 1); $event.stopPropagation()">
+                <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
                   <mat-icon>open_in_full</mat-icon>
                 </button>
               </mat-card-content>
@@ -38,7 +38,7 @@
                 <b>Phone:</b> {{card.phone}}<br>
                 <b>Email:</b> {{card.email}}<br>
                 <b>Property:</b> {{card.location}}<br>
-                <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id, 1); $event.stopPropagation()">
+                <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
                   <mat-icon>open_in_full</mat-icon>
                 </button>
               </mat-card-content>
@@ -61,7 +61,7 @@
                 <img [lazyLoad]="card.pet_photo2" class="pet-image" mat-card-image alt="Pet Photo"> <br>
                 <b>Pet Type:</b> {{card.pet_type2}}<br>
                 <b>Breed:</b> {{card.breed2}}<br>
-                <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id, 2); $event.stopPropagation()">
+                <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
                   <mat-icon>open_in_full</mat-icon>
                 </button>
               </mat-card-content>
@@ -80,7 +80,7 @@
                 <b>Phone:</b> {{card.phone}}<br>
                 <b>Email:</b> {{card.email}}<br>
                 <b>Property:</b> {{card.location}}<br>
-                <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id, 2); $event.stopPropagation()">
+                <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
                   <mat-icon>open_in_full</mat-icon>
                 </button>
               </mat-card-content>

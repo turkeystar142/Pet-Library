@@ -174,8 +174,8 @@ export class DashComponent implements OnInit {
     }
   }
 
-  goToPetPage(id: string, pet_num: number) {
-    this.router.navigate(['/pet', id, pet_num]);
+  goToPetPage(id: string) {
+    this.router.navigate(['/pet', id]);
   }
 
   toggleFlip(card: any) {
