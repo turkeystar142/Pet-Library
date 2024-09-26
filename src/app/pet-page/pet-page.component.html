@@ -1,49 +1,69 @@
 <button mat-mini-fab matTooltip="Back to Dashboard" class="back-button" color="accent" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
 <div class="grid-container">
     <mat-grid-list [cols]="columns" [rowHeight]="columns === 2 ? '665px' : '420px'" [ngClass]="{'large-screen': columns === 2, 'small-screen': columns === 1}">
+      <!-- First Pet Card -->
+      <mat-grid-tile>
+        <mat-card class="dashboard-card">
+            <mat-card-header>
+              <mat-card-title>
+                Pet Name: {{(pet | async)?.name}}
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="photo-card mat-body-1">
+                <img class="pet-image" mat-card-image src="{{(pet | async)?.pet_photo}}" alt="Photo of Pet"><br>    
+            </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <ng-container *ngIf="(pet | async)?.name2 && (pet | async)?.name2 !== 'N/A'">
         <mat-grid-tile>
-            <mat-card class="dashboard-card">
-                <mat-card-header>
-                  <mat-card-title>
-                    Pet Name: {{(pet | async)?.name}}
-                  </mat-card-title>
-                </mat-card-header>
-                <mat-card-content class="photo-card mat-body-1">
-                    <img class="pet-image" mat-card-image src="{{(pet | async)?.pet_photo}}" alt="Photo of Pet"><br>    
-                </mat-card-content>
-            </mat-card>
+          <mat-card class="dashboard-card">
+            <mat-card-header>
+              <mat-card-title>
+                Pet Name: {{(pet | async)?.name2}}
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="photo-card mat-body-1">
+                <img class="pet-image" mat-card-image src="{{(pet | async)?.pet_photo2}}" alt="Photo of Pet"><br>    
+            </mat-card-content>
+          </mat-card>
         </mat-grid-tile>
+      </ng-container>
+      <!-- Second Pet Card, if exists -->
+      <mat-grid-tile>
+        <mat-card class="dashboard-card">
+          <mat-card-header>
+            <mat-card-title>Pet Information:</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="mat-body-1">
+              <b>Breed:</b> {{(pet | async)?.breed}}<br>
+              <b>Pet Type:</b> {{(pet | async)?.pet_type}}<br>
+              <b>Pet Color:</b> {{(pet | async)?.pet_color}}<br>
+              <b>Owner:</b> {{(pet | async)?.owner_name}}<br>
+              <b>Phone:</b> {{(pet | async)?.phone}}<br>
+              <b>Email:</b> {{(pet | async)?.email}}<br>
+              <b>Property:</b> {{(pet | async)?.location}}<br>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <ng-container *ngIf="(pet | async)?.name2 && (pet | async)?.name2 !== 'N/A'">
         <mat-grid-tile>
-            <mat-card class="dashboard-card">
-              <mat-card-header>
-                <mat-card-title>Pet Information:</mat-card-title>
-              </mat-card-header>
-              <mat-card-content class="mat-body-1">
-                  <b>Breed:</b> {{(pet | async)?.breed}}<br>
-                  <b>Pet Type:</b> {{(pet | async)?.pet_type}}<br>
-                  <b>Pet Color:</b> {{(pet | async)?.pet_color}}<br>
-                  <b>Owner:</b> {{(pet | async)?.owner_name}}<br>
-                  <b>Phone:</b> {{(pet | async)?.phone}}<br>
-                  <b>Email:</b> {{(pet | async)?.email}}<br>
-                  <b>Property:</b> {{(pet | async)?.location}}<br>
-              </mat-card-content>
-            </mat-card>
-            <ng-container *ngIf="(pet | async)?.name2 && (pet | async)?.name2 !== 'N/A'">
-            <mat-card class="dashboard-card">
-              <mat-card-header>
-                <mat-card-title>Pet Information:</mat-card-title>
-              </mat-card-header>
-              <mat-card-content class="mat-body-1">
-                  <b>Breed:</b> {{(pet | async)?.breed2}}<br>
-                  <b>Pet Type:</b> {{(pet | async)?.pet_type2}}<br>
-                  <b>Pet Color:</b> {{(pet | async)?.pet_color2}}<br>
-                  <b>Owner:</b> {{(pet | async)?.owner_name}}<br>
-                  <b>Phone:</b> {{(pet | async)?.phone}}<br>
-                  <b>Email:</b> {{(pet | async)?.email}}<br>
-                  <b>Property:</b> {{(pet | async)?.location}}<br>
-              </mat-card-content>
-            </mat-card>
-          </ng-container>
+          <mat-card class="dashboard-card">
+            <mat-card-header>
+              <mat-card-title>Pet Information:</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="mat-body-1">
+                <b>Breed:</b> {{(pet | async)?.breed2}}<br>
+                <b>Pet Type:</b> {{(pet | async)?.pet_type2}}<br>
+                <b>Pet Color:</b> {{(pet | async)?.pet_color2}}<br>
+                <b>Owner:</b> {{(pet | async)?.owner_name}}<br>
+                <b>Phone:</b> {{(pet | async)?.phone}}<br>
+                <b>Email:</b> {{(pet | async)?.email}}<br>
+                <b>Property:</b> {{(pet | async)?.location}}<br>
+            </mat-card-content>
+          </mat-card>
         </mat-grid-tile>
+      </ng-container>
+      
+      
     </mat-grid-list>
 </div>
