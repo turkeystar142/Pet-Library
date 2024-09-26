@@ -10,7 +10,7 @@
               </mat-card-title>
             </mat-card-header>
             <mat-card-content class="photo-card mat-body-1">
-              <ng-container *ngIf="(pet | async)?.owner_name?.trim() == 'Krystsina'; else notBonnie">
+              <ng-container *ngIf="(pet | async)?.owner_name?.includes('Krystsina'); else notBonnie">
                 <img class="pet-image" mat-card-image src="{{(pet | async)?.pet_photo3}}" alt="Photo of Pet"> <br>
               </ng-container>
               <ng-template #notBonnie>
