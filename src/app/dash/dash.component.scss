@@ -8,10 +8,6 @@
   align-items: flex-start; /* Ensures cards align at the top */
 }
 
-.first-pet, .second-pet {
-  flex: 1; /* Ensures both cards take up equal space */
-}
-
 .mat-grid-tile-content {
   align-items: unset; /* Removes the align-items property for double-pet entries*/
   display: table; /* Help with alignment of cards in grid*/
