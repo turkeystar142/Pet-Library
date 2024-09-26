@@ -16,7 +16,7 @@
                 </mat-card-title>
               </mat-card-header>
               <mat-card-content class="dashboard-card-content-front mat-body-1">
-                <ng-container *ngIf="card.owner_name.includes('Krystsina Skarakhod'); else notBonnie">
+                <ng-container *ngIf="card.owner_name.includes('Krystsina'); else notBonnie">
                   <img [lazyLoad]="card.pet_photo3" class="pet-image" mat-card-image alt="Pet Photo"> <br>
                 </ng-container>
                 <ng-template #notBonnie>
