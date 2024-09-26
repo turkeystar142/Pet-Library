@@ -12,8 +12,8 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content-front mat-body-1">
-          <img [lazyLoad]="card.pet_photo" class="pet-image" mat-card-image alt="Pet Photo"><br>
-          <img *ngIf="!card.name2.includes('N/A')" [lazyLoad]="card.pet_photo2" class="pet-image" mat-card-image alt="Other Pet Photo"><br>
+          <img [lazyLoad]="card.pet_photo" class="pet-image" mat-card-image alt="Pet Photo">
+          <div><img *ngIf="!card.name2.includes('N/A')" [lazyLoad]="card.pet_photo2" class="pet-image" mat-card-image alt="Other Pet Photo"><br></div>
           <b>Pet Type:</b> {{card.pet_type}}<br>
           <b *ngIf="!card.name2.includes('N/A')">Other Type: {{card.pet_type2}}<br></b>
           <b>Breed:</b> {{card.breed}}<br>
