@@ -5,11 +5,15 @@
 .card-container {
   display: flex;
   gap: 10px;
+  align-items: flex-start; /* Ensures cards align at the top */
+}
+
+.first-pet, .second-pet {
+  flex: 1; /* Ensures both cards take up equal space */
 }
 
 .dashboard-card {
   position: absolute;
-  display: flex;
   min-width: 232px;
   flex-direction: column;
   height: 100%;
