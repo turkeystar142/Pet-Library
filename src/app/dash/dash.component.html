@@ -50,7 +50,7 @@
               </mat-card-title>
             </mat-card-header>
             <mat-card-content class="dashboard-card-content-front mat-body-1">
-              <img [lazyLoad]="card.pet_photo2" class="pet-image" mat-card-image alt="Pet Photo">
+              <img [lazyLoad]="card.pet_photo2" class="pet-image" mat-card-image alt="Pet Photo"> <br>
               <b>Pet Type:</b> {{card.pet_type2}}<br>
               <b>Breed:</b> {{card.breed2}}<br>
               <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
