@@ -36,7 +36,7 @@
         </mat-card>
       </mat-grid-tile>
       <!-- Second Pet Card, if exists -->
-      <ng-container *ngIf="(pet | async)?.name2 && (pet | async)?.name2 !== 'N/A'">
+      <ng-container *ngIf="(pet | async)?.name2 && (pet | async)?.name2?.includes('N/A')">
         <mat-grid-tile>
           <mat-card class="dashboard-card">
             <mat-card-header>
@@ -50,7 +50,7 @@
           </mat-card>
         </mat-grid-tile>
       </ng-container>
-      <ng-container *ngIf="(pet | async)?.name2 && (pet | async)?.name2 !== 'N/A'">
+      <ng-container *ngIf="(pet | async)?.name2 && (pet | async)?.name2?.includes('N/A')">
         <mat-grid-tile>
           <mat-card class="dashboard-card">
             <mat-card-header>
