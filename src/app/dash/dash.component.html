@@ -16,7 +16,12 @@
                 </mat-card-title>
               </mat-card-header>
               <mat-card-content class="dashboard-card-content-front mat-body-1">
-                <img [lazyLoad]="card.pet_photo" class="pet-image" mat-card-image alt="Pet Photo"> <br>
+                <ng-container *ngIf="card.owner_name.includes('Krystsina Skarakhod'); else notBonnie">
+                  <img [lazyLoad]="card.pet_photo3" class="pet-image" mat-card-image alt="Pet Photo"> <br>
+                </ng-container>
+                <ng-template #notBonnie>
+                  <img [lazyLoad]="card.pet_photo" class="pet-image" mat-card-image alt="Pet Photo"> <br>
+                </ng-template>
                 <b>Pet Type:</b> {{card.pet_type}}<br>
                 <b>Breed:</b> {{card.breed}}<br>
                 <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
