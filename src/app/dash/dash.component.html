@@ -10,16 +10,13 @@
           <mat-card *ngIf="!card.flip" class="dashboard-card" (click)="toggleFlip(card)">
             <mat-card-header>
               <mat-card-title class="pet-name">
-                {{card.name}} {{ !(card.name2.includes("N/A")) ? ' & ' + card.name2 : '' }}
+                {{card.name}}
               </mat-card-title>
             </mat-card-header>
             <mat-card-content class="dashboard-card-content-front mat-body-1">
               <img [lazyLoad]="card.pet_photo" class="pet-image" mat-card-image alt="Pet Photo">
-              <div><img *ngIf="!card.name2.includes('N/A')" [lazyLoad]="card.pet_photo2" class="pet-image" mat-card-image alt="Other Pet Photo"><br></div>
               <b>Pet Type:</b> {{card.pet_type}}<br>
-              <b *ngIf="!card.name2.includes('N/A')">Other Type: {{card.pet_type2}}<br></b>
               <b>Breed:</b> {{card.breed}}<br>
-              <b *ngIf="!card.name2.includes('N/A')">Other Breed: {{card.breed2}}<br></b>
               <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
                 <mat-icon>open_in_full</mat-icon>
               </button>
@@ -28,16 +25,13 @@
           <mat-card *ngIf="card.flip" class="dashboard-card" (click)="toggleFlip(card)">
             <mat-card-header>
               <mat-card-title class="pet-name">
-                {{card.name}} {{ !(card.name2.includes("N/A")) ? ' & ' + card.name2 : '' }}
+                {{card.name}}
               </mat-card-title>
             </mat-card-header>
             <mat-card-content class="dashboard-card-content-back mat-body-1">
               <b>Breed:</b> {{card.breed}}<br>
-              <b *ngIf="!card.name2.includes('N/A')">Other Breed: {{card.breed2}}<br></b>
               <b>Pet Type:</b> {{card.pet_type}}<br>
-              <b *ngIf="!card.name2.includes('N/A')">Other Type: {{card.pet_type2}}<br></b>
               <b>Pet Color:</b> {{card.pet_color}}<br>
-              <b *ngIf="!card.name2.includes('N/A')">Other Pet Color: {{card.pet_color2}}<br></b>
               <b>Owner:</b> {{card.owner_name}}<br>
               <b>Phone:</b> {{card.phone}}<br>
               <b>Email:</b> {{card.email}}<br>

@@ -14,6 +14,7 @@
 
 .mat-grid-tile-content {
   align-items: unset; /* Removes the align-items property for double-pet entries*/
+  display: table; /* Help with alignment of cards in grid*/
 }
 
 .dashboard-card {
