@@ -60,7 +60,7 @@
 }
 
 .search-container {
-  position: absolute;
+  display: flex;
   align-items: center;
 }
 
@@ -69,12 +69,10 @@
 }
 
 .mat-form-field {
-  display: flex; /* Ensure the form field behaves as a flex container */
-  align-items: center; /* Center items vertically within the form field */
-  width: 100%; /* Full width */
+  flex-grow: 1; /* Allow the form field to take up available space */
 }
 
 .search-clear{
-  margin-left: 16px; /* Adjust this as necessary */
+  margin-left: 90%; /* Adjust this as necessary */
   align-self: center; /* Center the button vertically if necessary */
 }
