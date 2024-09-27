@@ -9,6 +9,13 @@
   z-index: 20;
 }
 
+.delete-button {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  z-index: 20;
+}
+
 .large-screen {
   .pet-image {
       max-width: 600px;

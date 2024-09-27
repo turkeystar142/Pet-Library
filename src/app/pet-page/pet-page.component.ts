@@ -1,6 +1,6 @@
 import { Component, HostListener, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { API_KEY, BASE_URL_SUBMISSION, COMPILED_URL } from '../app.component';
+import { API_KEY, BASE_URL_SUBMISSION} from '../app.component';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subscription, map } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -108,5 +108,6 @@ onResize(event: Event) {
     this.DELETE_URL_SUBMISSION = BASE_URL_SUBMISSION.concat('/', id, '?apiKey=', API_KEY);
     this.http.delete(this.DELETE_URL_SUBMISSION).subscribe(response => result);
     console.log(result);
+    this.router.navigate(['/dash']);
   }
 }

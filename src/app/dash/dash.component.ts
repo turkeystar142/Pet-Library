@@ -3,7 +3,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { COMPILED_URL } from '../app.component';
+import { API_KEY, BASE_URL_SUBMISSION, COMPILED_URL} from '../app.component';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
 
@@ -46,6 +46,7 @@ export class DashComponent implements OnInit {
   pageSize = new BehaviorSubject<number>(10);
   totalCards = 0;
   columns: number = 5;
+  ADD_URL_SUBMISSION!: string;
 
   constructor(private router: Router) {
     this.columns = this.getNumberOfColumns();
@@ -182,5 +183,15 @@ export class DashComponent implements OnInit {
 
   toggleFlip(card: any) {
     card.flip = !card.flip;
+  }
+
+  // This method is not implemented yet, we don't know if users will have permission/photos to do this
+  addPet() {
+    // Set the Submission URL for DELTE API call
+    // var result = '';
+    // this.ADD_URL_SUBMISSION = BASE_URL_SUBMISSION.concat('/', id, '?apiKey=', API_KEY);
+    // this.http.post(this.ADD_URL_SUBMISSION, x, x);
+    // console.log(result);
+    // this.router.navigate(['/dash']);
   }
 }
