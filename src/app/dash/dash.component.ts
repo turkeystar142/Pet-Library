@@ -39,7 +39,7 @@ export class DashComponent implements OnInit {
   private http = inject(HttpClient);
   private dataSubject = new BehaviorSubject<Card[]>([]);
   private pageIndex = new BehaviorSubject<number>(0);
-  private searchTerm = new BehaviorSubject<string>('');
+  searchTerm = new BehaviorSubject<string>('');
 
   cards!: Observable<Card[]>;
   paginatedCards!: Observable<Card[]>;
@@ -136,6 +136,10 @@ export class DashComponent implements OnInit {
   onInput(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     this.searchTerm.next(inputElement.value);
+  }
+
+  clearSearch() {
+    this.searchTerm.next('');
   }
 
   onPageChange(event: PageEvent) {
