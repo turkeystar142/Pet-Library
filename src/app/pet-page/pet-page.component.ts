@@ -108,9 +108,24 @@ onResize(event: Event) {
     // Set the Submission URL for DELTE API call
     var result = '';
     this.DELETE_URL_SUBMISSION = BASE_URL_SUBMISSION.concat('/', id, '?apiKey=', API_KEY);
-    this.http.delete(this.DELETE_URL_SUBMISSION).subscribe(response => result);
-    this.checkResult(result);
-    this.router.navigate(['/dash']);
+
+    // Perform the DELETE request
+    this.http.delete(this.DELETE_URL_SUBMISSION).subscribe(
+      (response: any) => {
+        // Assuming response contains some result, assign it here
+        const result = response.message || 'success';  // Modify based on your actual API response structure
+
+        // Check the result and show the tooltip if needed
+        this.checkResult(result);
+
+        // Navigate to dashboard after processing
+        this.router.navigate(['/dash']);
+      },
+      (error: any) => {
+        // Handle error if needed
+        console.error('Error during delete:', error);
+      }
+    );
   }
 
   checkResult(result: string) {
