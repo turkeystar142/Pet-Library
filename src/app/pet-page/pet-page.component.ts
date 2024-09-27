@@ -1,10 +1,11 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, inject, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { API_KEY, BASE_URL_SUBMISSION} from '../app.component';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subscription, map } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
+import { MatTooltip } from '@angular/material/tooltip';
 
 interface Pet {
   name: string;
@@ -31,6 +32,7 @@ interface Pet {
   styleUrls: ['./pet-page.component.scss']
 })
 export class PetPageComponent {
+  @ViewChild('tooltip') tooltip!: MatTooltip;
   petId: string = '';
   private http = inject(HttpClient);
   private breakpointObserver = inject(BreakpointObserver);
@@ -107,7 +109,13 @@ onResize(event: Event) {
     var result = '';
     this.DELETE_URL_SUBMISSION = BASE_URL_SUBMISSION.concat('/', id, '?apiKey=', API_KEY);
     this.http.delete(this.DELETE_URL_SUBMISSION).subscribe(response => result);
-    console.log(result);
+    this.checkResult(result);
     this.router.navigate(['/dash']);
+  }
+
+  checkResult(result: string) {
+    if (result.includes('success')) {
+      this.tooltip.show();
+    }
   }
 }

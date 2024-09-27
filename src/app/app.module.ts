@@ -28,6 +28,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { PetPageComponent } from './pet-page/pet-page.component'; 
 import { FormsModule } from '@angular/forms';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
 
 // Routing Definitions
 const routes: Routes = [
@@ -67,6 +68,7 @@ const routes: Routes = [
         MatCardModule,
         MatMenuModule,
         MatInputModule,
+        MatTooltip,
         // Service Worker for Cache
         ServiceWorkerModule.register('ngsw-worker.js', {
           enabled: true,
