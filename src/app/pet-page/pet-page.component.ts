@@ -39,6 +39,7 @@ export class PetPageComponent {
   subscription = new Subscription;
     // Define the property at the class level
     COMPILED_URL_SUBMISSION!: string;
+    DELETE_URL_SUBMISSION!: string;
   columns: number = 2;
 
 constructor(private activeRoute: ActivatedRoute, private router: Router) { 
@@ -99,5 +100,13 @@ onResize(event: Event) {
   goBack() {
     // Use the router to navigate back to the previous page
     this.router.navigate(['/dashboard']);
+  }
+
+  deletePet(id: string) {
+    // Set the Submission URL for DELTE API call
+    var result = '';
+    this.DELETE_URL_SUBMISSION = BASE_URL_SUBMISSION.concat('/', id, '?apiKey=', API_KEY);
+    this.http.delete(this.DELETE_URL_SUBMISSION).subscribe(response => result);
+    console.log(result);
   }
 }
