@@ -109,7 +109,11 @@ onResize(event: Event) {
     if (password && password === ADMIN_PASS) {
       // Now post the delete API call with the password verified
       this.deletePet(id);
-    } else {
+    } else if (password && (password !== ADMIN_PASS)) {
+      alert("Incorrect password");
+      console.log('Incorrect password, delete operation canceled');
+    }
+    else {
       console.log('Delete operation canceled');
     }
   }
@@ -140,7 +144,7 @@ onResize(event: Event) {
 
   checkResult(result: string) {
     if (result.includes('success')) {
-      this.tooltip.show();
+      alert('Successfully deleted!');
       console.log(result);
     }
   }
