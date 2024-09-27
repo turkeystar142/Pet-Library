@@ -23,12 +23,16 @@
               </mat-card-header>
               <mat-card-content class="dashboard-card-content-front mat-body-1">
                 <ng-container *ngIf="card.owner_name.includes('Krystsina'); else notBonnie">
-                  <mat-spinner *ngIf="isLoading" diameter="50" color="primary"></mat-spinner> <!-- Adjust diameter and color as needed --> <br>
-                  <img [lazyLoad]="card.pet_photo3" (load)="onImageLoad()"  class="pet-image" mat-card-image alt=""> <br>
+                  <div class="spinner">
+                    <mat-spinner class="spinner" *ngIf="isLoading" diameter="50" color="primary"></mat-spinner> <!-- Adjust diameter and color as needed --> <br>
+                  </div>
+                  <img [lazyLoad]="card.pet_photo3" (load)="onImageLoad()"  class="pet-image" mat-card-image alt="Pet Photo"> <br>
                 </ng-container>
                 <ng-template #notBonnie>
-                  <mat-spinner *ngIf="isLoading" diameter="50" color="primary"></mat-spinner> <!-- Adjust diameter and color as needed --> <br>
-                  <img [lazyLoad]="card.pet_photo" (load)="onImageLoad()"  class="pet-image" mat-card-image alt=""> <br>
+                  <div class="spinner">
+                    <mat-spinner class="spinner" *ngIf="isLoading" diameter="50" color="primary"></mat-spinner> <!-- Adjust diameter and color as needed --> <br>
+                  </div>
+                  <img [lazyLoad]="card.pet_photo" (load)="onImageLoad()"  class="pet-image" mat-card-image alt="Pet Photo"> <br>
                 </ng-template>
                 <b>Pet Type:</b> {{card.pet_type}}<br>
                 <b>Breed:</b> {{card.breed}}<br>
@@ -71,7 +75,7 @@
                 </mat-card-title>
               </mat-card-header>
               <mat-card-content class="dashboard-card-content-front mat-body-1">
-                <mat-spinner *ngIf="isLoading" diameter="50" color="primary"></mat-spinner> <!-- Adjust diameter and color as needed --> <br>
+                <mat-spinner class="spinner" *ngIf="isLoading" diameter="50" color="primary"></mat-spinner> <!-- Adjust diameter and color as needed --> <br>
                 <img [lazyLoad]="card.pet_photo2" (load)="onImageLoad()" class="pet-image" mat-card-image alt="Pet Photo"> <br>
                 <b>Pet Type:</b> {{card.pet_type2}}<br>
                 <b>Breed:</b> {{card.breed2}}<br>

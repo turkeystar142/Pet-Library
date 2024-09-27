@@ -75,3 +75,8 @@
 .search-clear{
   align-self: flex-start; /* Center the button vertically if necessary */
 }
+
+.spinner {
+  display: flex;
+  justify-content: center;
+}
