@@ -59,6 +59,17 @@
   overflow: visible;
 }
 
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
 .search-input {
   width: 100%;
+  flex-grow: 1;
+  margin-right: 8px;
+}
+
+.mat-icon-button {
+  margin-right: 32px; /* Adjust as necessary */
 }
