@@ -131,6 +131,7 @@ onResize(event: Event) {
   checkResult(result: string) {
     if (result.includes('success')) {
       this.tooltip.show();
+      console.log(result);
     }
   }
 }
