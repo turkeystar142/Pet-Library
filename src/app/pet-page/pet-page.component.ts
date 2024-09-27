@@ -1,6 +1,6 @@
 import { Component, HostListener, inject, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { API_KEY, BASE_URL_SUBMISSION} from '../app.component';
+import { API_KEY, BASE_URL_SUBMISSION, ADMIN_PASS} from '../app.component';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subscription, map } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -102,6 +102,16 @@ onResize(event: Event) {
   goBack() {
     // Use the router to navigate back to the previous page
     this.router.navigate(['/dashboard']);
+  }
+
+  verifyAdmin(id: string) {
+    const password = window.prompt('Please enter your password to delete this pet:');
+    if (password === ADMIN_PASS) {
+      // Now post the delete API call with the password
+      this.deletePet(id);
+    } else {
+      console.log('Delete operation canceled');
+    }
   }
 
   deletePet(id: string) {

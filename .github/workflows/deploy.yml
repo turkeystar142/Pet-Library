@@ -24,10 +24,12 @@ jobs:
       env:
         FORM_ID: ${{ secrets.FORM_ID }}
         API_KEY: ${{ secrets.API_KEY }}
+        ADMIN_PASS: ${{ secrets.ADMIN_PASS }}
       run: |
         echo "Updating environment files"
         sed -i "s|formId: ''|formId: '$FORM_ID'|g" src/environments/environments.ts
         sed -i "s|apiKey: ''|apiKey: '$API_KEY'|g" src/environments/environments.ts
+        sed -i "s|adminPass: ''|adminPass: '$ADMIN_PASS'|g" src/environments/environments.ts
         npm run build
 
     - name: Deploy to GitHub Pages
