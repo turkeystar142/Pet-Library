@@ -28,7 +28,7 @@
                 </ng-container>
                 <ng-template #notBonnie>
                   <mat-spinner *ngIf="isLoading" diameter="50" color="primary"></mat-spinner> <!-- Adjust diameter and color as needed --> <br>
-                  <img src="card.pet_photo" (load)="onImageLoad()"  class="pet-image" mat-card-image alt="Pet Photo"> <br>
+                  <img [lazyLoad]="card.pet_photo" (load)="onImageLoad()"  class="pet-image" mat-card-image alt="Pet Photo"> <br>
                 </ng-template>
                 <b>Pet Type:</b> {{card.pet_type}}<br>
                 <b>Breed:</b> {{card.breed}}<br>
