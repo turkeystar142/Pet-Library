@@ -106,8 +106,8 @@ onResize(event: Event) {
 
   verifyAdmin(id: string) {
     const password = window.prompt('Please enter your password to delete this pet:');
-    if (password === ADMIN_PASS) {
-      // Now post the delete API call with the password
+    if (password && password === ADMIN_PASS) {
+      // Now post the delete API call with the password verified
       this.deletePet(id);
     } else {
       console.log('Delete operation canceled');
