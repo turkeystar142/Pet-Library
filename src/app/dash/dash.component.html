@@ -2,7 +2,7 @@
   <h1 class="mat-h1">Dashboard</h1>
   <mat-form-field class="search-input">
     <mat-label>Search</mat-label>
-    <input matInput [(ngModel)]="searchTerm" (input)="onInput($event)" type="text" placeholder="Search by name, owner, breed...">
+    <input matInput (input)="onInput($event)" type="text" placeholder="Search by name, owner, breed...">
     <button mat-icon-button *ngIf="searchTerm" (click)="clearSearch()">
       <mat-icon>clear</mat-icon>
     </button>

@@ -39,7 +39,7 @@ export class DashComponent implements OnInit {
   private http = inject(HttpClient);
   private dataSubject = new BehaviorSubject<Card[]>([]);
   private pageIndex = new BehaviorSubject<number>(0);
-  searchTerm = new BehaviorSubject<string>('');
+  searchTerm: BehaviorSubject<string>  = new BehaviorSubject<string>('');
 
   cards!: Observable<Card[]>;
   paginatedCards!: Observable<Card[]>;
