@@ -46,6 +46,7 @@ export class DashComponent implements OnInit {
   pageSize = new BehaviorSubject<number>(10);
   totalCards = 0;
   columns: number = 5;
+  isLoading = true;
   ADD_URL_SUBMISSION!: string;
 
   constructor(private router: Router) {
@@ -187,6 +188,13 @@ export class DashComponent implements OnInit {
 
   toggleFlip(card: any) {
     card.flip = !card.flip;
+  }
+
+  onImageLoad() {
+    // Simulate a loading delay
+    setTimeout(() => {
+      this.isLoading = false; // Change to false after loading is complete
+    }, 5000); // Adjust delay as necessary
   }
 
   // This method is not implemented yet, we don't know if users will have permission/photos to do this
