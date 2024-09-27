@@ -20,6 +20,7 @@ import { MatListModule } from '@angular/material/list';
 import { TableComponent } from './table/table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { DashComponent } from './dash/dash.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -63,6 +64,7 @@ const routes: Routes = [
         MatListModule,
         MatTableModule,
         MatPaginatorModule,
+        MatProgressSpinnerModule,
         MatSortModule,
         MatGridListModule,
         MatCardModule,
