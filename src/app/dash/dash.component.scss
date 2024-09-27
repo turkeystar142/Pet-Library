@@ -67,9 +67,13 @@
 .search-input {
   width: 100%;
   flex-grow: 1;
-  margin-right: 8px;
+}
+
+.mat-form-field {
+  flex-grow: 1; /* Allow the form field to take up available space */
 }
 
 .search-clear{
-  margin-right: 32px; /* Adjust as necessary */
+  margin-left: -32px; /* Adjust this as necessary */
+  align-self: center; /* Center the button vertically if necessary */
 }
