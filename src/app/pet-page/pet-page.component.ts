@@ -113,7 +113,7 @@ onResize(event: Event) {
     this.http.delete(this.DELETE_URL_SUBMISSION).subscribe(
       (response: any) => {
         // Assuming response contains some result, assign it here
-        const result = response.includes('success') ? 'success' : 'error';  // Modify based on your actual API response structure
+        const result = response.message && response.message.includes('success') ? 'success' : 'error';  // Modify based on your actual API response structure
 
         // Check the result and show the tooltip if needed
         this.checkResult(result);
