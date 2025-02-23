@@ -77,7 +77,7 @@ onResize(event: Event) {
           pet_color2: item?.answers?.['21']?.answer ? item?.answers?.['21']?.answer : "N/A", // '21' is the key for the 'Pet Color2' question
           owner_name: item?.answers?.['4']?.prettyFormat ? item?.answers?.['4']?.prettyFormat : "N/A", // '4' is the key for the 'Owner\'s Name' question
           id: item?.id ? item?.id : "0", // 
-          location: item?.answers?.['3']?.prettyFormat ? item?.answers?.['3']?.prettyFormat : "N/A", // '3' is the key for the 'Location' question
+          location: item?.answers?.['3']?.prettyFormat ? item?.answers?.['3']?.prettyFormat : (item?.answers?.['26']?.answer ? item?.answers?.['26']?.answer + " " + item?.answers?.['28']?.answer : "N/A"), // '3' is the key for the 'Location' question
           pet_photo: item?.answers?.['19']?.answer[0], // '19' is the key for the 'photo' question
           pet_photo2: item?.answers?.['19']?.answer[1], // '19.2' is the key for the 'photo2' question
           pet_photo3: item?.answers?.['19']?.answer[2], // '19.2' is the key for the 'photo' question
