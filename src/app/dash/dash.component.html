@@ -98,10 +98,13 @@
                 <b>Phone:</b> {{card.phone}}<br>
                 <b>Email:</b> {{card.email}}<br>
                 <b>Property:</b> {{card.location}}<br>
+                
+              </mat-card-content>
+              <mat-card-footer>
                 <button mat-icon-button class="more-button" aria-label="More Info" (click)="goToPetPage(card.id); $event.stopPropagation()">
                   <mat-icon>open_in_full</mat-icon>
                 </button>
-              </mat-card-content>
+              </mat-card-footer>
             </mat-card>
           </div>
         </mat-grid-tile>
