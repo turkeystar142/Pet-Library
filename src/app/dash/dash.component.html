@@ -22,18 +22,10 @@
                 </mat-card-title>
               </mat-card-header>
               <mat-card-content class="dashboard-card-content-front mat-body-1">
-                <ng-container *ngIf="card.owner_name.includes('Krystsina'); else notBonnie">
-                  <div class="spinner">
-                    <mat-spinner class="spinner" *ngIf="isLoading" diameter="50" color="primary"></mat-spinner> <!-- Adjust diameter and color as needed --> <br>
-                  </div>
-                  <img [lazyLoad]="card.pet_photo3" (load)="onImageLoad()"  class="pet-image" mat-card-image alt="Pet Photo"> <br>
-                </ng-container>
-                <ng-template #notBonnie>
-                  <div class="spinner">
-                    <mat-spinner class="spinner" *ngIf="isLoading" diameter="50" color="primary"></mat-spinner> <!-- Adjust diameter and color as needed --> <br>
-                  </div>
-                  <img [lazyLoad]="card.pet_photo" (load)="onImageLoad()"  class="pet-image" mat-card-image alt="Pet Photo"> <br>
-                </ng-template>
+                <div class="spinner">
+                  <mat-spinner class="spinner" *ngIf="isLoading" diameter="50" color="primary"></mat-spinner> <!-- Adjust diameter and color as needed --> <br>
+                </div>
+                <img [lazyLoad]="card.pet_photo" (load)="onImageLoad()"  class="pet-image" mat-card-image alt="Pet Photo"> <br>
                 <b>Pet Type:</b> {{card.pet_type}}<br>
                 <b>Breed:</b> {{card.breed}}<br>
               </mat-card-content>
