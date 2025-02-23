@@ -101,16 +101,16 @@ export class DashComponent implements OnInit {
         // Filter cards based on the search term
         filteredCards = filteredCards.filter(card =>
           card.name.toLowerCase().includes(searchTermLower) ||
-          card.name2.toLowerCase().includes(searchTermLower) //||
-          // card.breed.toLowerCase().includes(searchTermLower) ||
-          // card.breed2.toLowerCase().includes(searchTermLower) ||
-          // card.owner_name.toLowerCase().includes(searchTermLower) ||
-          // card.pet_color.toLowerCase().includes(searchTermLower) ||
-          // card.pet_color2.toLowerCase().includes(searchTermLower) ||
-          // card.pet_type.toLowerCase().includes(searchTermLower) ||
-          // card.pet_type2.toLowerCase().includes(searchTermLower) ||
-          // card.phone.toLowerCase().includes(searchTermLower) ||
-          // card.location.toLowerCase().includes(searchTermLower)
+          card.name2.toLowerCase().includes(searchTermLower) ||
+          card.breed.toLowerCase().includes(searchTermLower) ||
+          card.breed2.toLowerCase().includes(searchTermLower) ||
+          card.owner_name.toLowerCase().includes(searchTermLower) ||
+          card.pet_color.toLowerCase().includes(searchTermLower) ||
+          card.pet_color2.toLowerCase().includes(searchTermLower) ||
+          card.pet_type.toLowerCase().includes(searchTermLower) ||
+          card.pet_type2.toLowerCase().includes(searchTermLower) ||
+          card.phone.toLowerCase().includes(searchTermLower) ||
+          card.location.toLowerCase().includes(searchTermLower)
         );
 
         // Sort cards by name in alphabetical order
