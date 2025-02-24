@@ -9,7 +9,7 @@
       <mat-icon>clear</mat-icon>
     </button>
   </div>
-  <mat-grid-list [cols]="columns" rowHeight="350px" gutterSize="20px" style="z-index: -1;">
+  <mat-grid-list [cols]="columns" rowHeight="350px" gutterSize="20px">
     <ng-container *ngFor="let card of paginatedCards | async">
       <!-- First Pet Card -->
       <mat-grid-tile [colspan]="card.cols" [rowspan]="card.rows">
