@@ -1,0 +1,91 @@
+// Import Angular Material Theming Core
+@import "~@angular/material/theming";
+
+// Define your custom color palettes
+$primary-palette: (
+  50: #e0f1f8,
+  100: #b3d9e6,
+  200: #80c0d3,
+  300: #4da7c1,
+  400: #268a9e,
+  500: #005488,  // Your primary color
+  600: #00477d,
+  700: #003b71,
+  800: #003064,
+  900: #002458,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white
+  )
+);
+
+$accent-palette: (
+  50: #e3f4f3,
+  100: #b3e0df,
+  200: #80ccd1,
+  300: #4db9c3,
+  400: #26a7b5,
+  500: #2a8c94,  // Your accent color
+  600: #247a7f,
+  700: #1f6872,
+  800: #1a5665,
+  900: #154658,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white
+  )
+);
+
+$warn-palette: (
+  50: #fbe1e2,
+  100: #f8b3b5,
+  200: #f58788,
+  300: #f15c5f,
+  400: #eb4244,
+  500: #ac2a32,  // Your third color
+  600: #95242a,
+  700: #7e1e22,
+  800: #68171c,
+  900: #531218,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white
+  )
+);
+
+// Define your Angular Material theme using the palettes
+$theme-primary: mat-palette($primary-palette);
+$theme-accent: mat-palette($accent-palette);
+$theme-warn: mat-palette($warn-palette);
+
+// Create the theme using mat-light-theme
+$my-app-theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
+// Create the theme using mat-dark-theme
+$my-dark-theme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
+
+// Apply the theme globally to your app
+@include angular-material-theme($my-app-theme);
