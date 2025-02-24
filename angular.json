@@ -31,7 +31,7 @@
               "src/assets"
             ],
             "styles": [
-                "src/theme.scss",
+                "src/src_theme-colors.scss",
                 "src/styles.scss"
             ],
             "scripts": [],
@@ -95,7 +95,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/theme.scss",
+              "src/src_theme-colors.scss",
               "src/styles.scss"
             ],
             "scripts": []

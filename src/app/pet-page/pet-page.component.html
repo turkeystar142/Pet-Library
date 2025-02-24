@@ -18,7 +18,7 @@
         <mat-card class="dashboard-card">
           <mat-card-header>
             <mat-card-title>Pet Information:</mat-card-title>
-            <button mat-fab matTooltip="Delete Pet" class="delete-button" color="accent" (click)="verifyAdmin(petId)" matTooltip="Delete Pets"
+            <button mat-fab matTooltip="Delete Pet" class="delete-button" color="accent" (click)="verifyAdmin(petId)"
             #tooltip="matTooltip"><mat-icon>delete_forever</mat-icon></button>
           </mat-card-header>
           <mat-card-content class="mat-body-1">
@@ -32,39 +32,5 @@
           </mat-card-content>
         </mat-card>
       </mat-grid-tile>
-      <!-- Second Pet Card, if exists -->
-      <ng-container *ngIf="(pet | async)?.name2 && !(pet | async)?.name2?.includes('N/A')">
-        <mat-grid-tile>
-          <mat-card class="dashboard-card">
-            <mat-card-header>
-              <mat-card-title>
-                Pet Name: {{(pet | async)?.name2}}
-              </mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="photo-card mat-body-1">
-                <img class="pet-image" mat-card-image src="{{(pet | async)?.pet_photo2}}" alt="Photo of Pet"><br>    
-            </mat-card-content>
-          </mat-card>
-        </mat-grid-tile>
-      </ng-container>
-      <ng-container *ngIf="(pet | async)?.name2 && !(pet | async)?.name2?.includes('N/A')">
-        <mat-grid-tile>
-          <mat-card class="dashboard-card">
-            <mat-card-header>
-              <mat-card-title>Pet Information:</mat-card-title>
-              <button mat-fab matTooltip="Delete Pet" class="delete-button" color="accent" (click)="verifyAdmin(petId)"><mat-icon>delete_forever</mat-icon></button>
-            </mat-card-header>
-            <mat-card-content class="mat-body-1">
-                <b>Breed:</b> {{(pet | async)?.breed2}}<br>
-                <b>Pet Type:</b> {{(pet | async)?.pet_type2}}<br>
-                <b>Pet Color:</b> {{(pet | async)?.pet_color2}}<br>
-                <b>Owner:</b> {{(pet | async)?.owner_name}}<br>
-                <b>Phone:</b> {{(pet | async)?.phone}}<br>
-                <b>Email:</b> {{(pet | async)?.email}}<br>
-                <b>Property:</b> {{(pet | async)?.location}}<br>
-            </mat-card-content>
-          </mat-card>
-        </mat-grid-tile>
-      </ng-container>
     </mat-grid-list>
 </div>
