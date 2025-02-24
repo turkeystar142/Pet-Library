@@ -1,9 +1,21 @@
-// Import the custom theme file
-@use 'src/src_theme-colors.scss';
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@use './src/_theme-colors.scss' as my-theme; // location of generated file
 
-html, body { height: 100%;}
+html, body {
+    height: 100%;
+  @include mat.theme((
+    color: (
+      primary: my-theme.$primary-palette,
+      tertiary: my-theme.$tertiary-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
 body { margin: 0; }
+
+
 
 // blue #005488
 // turquoise #2a8c94
