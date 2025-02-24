@@ -1,6 +1,6 @@
 <button mat-mini-fab matTooltip="Back to Dashboard" class="back-button" color="accent" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
 <div class="grid-container">
-    <mat-grid-list [cols]="columns" [rowHeight]="columns === 2 ? '665px' : '420px'" [ngClass]="{'large-screen': columns === 2, 'small-screen': columns === 1}">
+    <mat-grid-list style="z-index: -1;" [cols]="columns" [rowHeight]="columns === 2 ? '665px' : '420px'" [ngClass]="{'large-screen': columns === 2, 'small-screen': columns === 1}">
       <!-- First Pet Card -->
       <mat-grid-tile>
         <mat-card class="dashboard-card">
