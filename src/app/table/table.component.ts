@@ -6,9 +6,10 @@ import { MatSort } from '@angular/material/sort';
 import { TableDataSource, TableItem } from './table-datasource';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+    selector: 'app-table',
+    templateUrl: './table.component.html',
+    styleUrls: ['./table.component.scss'],
+    standalone: false
 })
 export class TableComponent implements AfterViewInit {
   private _paginator!: MatPaginator;

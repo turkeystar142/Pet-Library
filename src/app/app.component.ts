@@ -5,9 +5,10 @@ import { map, shareReplay } from 'rxjs/operators';
 import { environment } from '../environments/environments';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent {
   title = 'pet-library';

@@ -30,9 +30,10 @@ interface Card {
 }
 
 @Component({
-  selector: 'app-dash',
-  templateUrl: './dash.component.html',
-  styleUrls: ['./dash.component.scss']
+    selector: 'app-dash',
+    templateUrl: './dash.component.html',
+    styleUrls: ['./dash.component.scss'],
+    standalone: false
 })
 export class DashComponent implements OnInit {
   private breakpointObserver = inject(BreakpointObserver);

@@ -27,9 +27,10 @@ interface Pet {
 }
 
 @Component({
-  selector: 'app-pet-page',
-  templateUrl: './pet-page.component.html',
-  styleUrls: ['./pet-page.component.scss']
+    selector: 'app-pet-page',
+    templateUrl: './pet-page.component.html',
+    styleUrls: ['./pet-page.component.scss'],
+    standalone: false
 })
 export class PetPageComponent {
   @ViewChild('tooltip') tooltip!: MatTooltip;
