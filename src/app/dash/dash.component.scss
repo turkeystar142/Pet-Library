@@ -57,6 +57,8 @@
 
 .mat-grid-tile {
   overflow: visible;
+  display: flex;
+  align-items: center;
 }
 
 .search-container {
