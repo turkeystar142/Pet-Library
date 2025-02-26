@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1740606095482,
+  "timestamp": 1740606746174,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main-7FBOEMKU.js",
+        "/main-K7WO7UZ7.js",
         "/polyfills-FFHMD2TL.js",
         "/styles-EX6S6SN3.css"
       ],
@@ -36,8 +36,8 @@
   "hashTable": {
     "/assets/image-404.png": "ca5c6c34a966bf8a491cae4f7f46c7aed136abc5",
     "/favicon.ico": "0afb4142f19b766925fdb6f1120dd74f99b4b48d",
-    "/index.html": "bcbebfd6d453d0d199cfcd950bd8b4133474584b",
-    "/main-7FBOEMKU.js": "c6d076e1cc3151a7750db0247a7e0596fc214b20",
+    "/index.html": "dfccf14fc09e275fc1188284d5110977e8f5c226",
+    "/main-K7WO7UZ7.js": "ccc4bc3a1dc15e6019bb948e9bec6045e8b8ffc9",
     "/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
     "/styles-EX6S6SN3.css": "28569da238a6e30edaf5be3e6d36385a9c342655"
   },
