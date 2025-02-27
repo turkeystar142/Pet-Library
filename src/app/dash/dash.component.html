@@ -1,13 +1,15 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
-  <div class="search-container">
-    <mat-form-field class="search-input">
-      <mat-label>Search by name, owner, breed, property...</mat-label>
-      <input matInput [value]="searchTerm | async" (input)="onInput($event)" type="text" placeholder="Example: Green Village">
-    </mat-form-field>
-    <button mat-icon-button class="search-clear" *ngIf="searchTerm.value !== ''" (click)="clearSearch()">
-      <mat-icon>clear</mat-icon>
-    </button>
+  <div class="fixed-header">
+    <h1 class="mat-h1">Dashboard</h1>
+    <div class="search-container">
+      <mat-form-field class="search-input">
+        <mat-label>Search by name, owner, breed, property...</mat-label>
+        <input matInput [value]="searchTerm | async" (input)="onInput($event)" type="text" placeholder="Example: Green Village">
+      </mat-form-field>
+      <button mat-icon-button class="search-clear" *ngIf="searchTerm.value !== ''" (click)="clearSearch()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
   </div>
   <mat-grid-list [cols]="columns" rowHeight="350px" gutterSize="20px">
     <ng-container *ngFor="let card of cards | async">
