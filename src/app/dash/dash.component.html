@@ -11,10 +11,8 @@
   </div>
   <mat-grid-list [cols]="columns" rowHeight="350px" gutterSize="20px">
     <ng-container *ngFor="let card of paginatedCards | async">
-      <!-- First Pet Card -->
       <mat-grid-tile [colspan]="card.cols" [rowspan]="card.rows">
         <div class="card-container">
-          <div class="first-pet">
             <mat-card *ngIf="!card.flip" class="dashboard-card" (click)="toggleFlip(card)">
               <mat-card-header>
                 <mat-card-title class="pet-name">
@@ -54,7 +52,6 @@
               </mat-card-footer>
             </mat-card>
           </div>
-        </div>
       </mat-grid-tile>
     </ng-container>
   </mat-grid-list>
