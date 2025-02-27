@@ -10,7 +10,7 @@
     </button>
   </div>
   <mat-grid-list [cols]="columns" rowHeight="350px" gutterSize="20px">
-    <ng-container *ngFor="let card of paginatedCards | async">
+    <ng-container *ngFor="let card of cards | async">
       <mat-grid-tile [colspan]="card.cols" [rowspan]="card.rows">
         <div class="card-container">
             <mat-card *ngIf="!card.flip" class="dashboard-card" (click)="toggleFlip(card)">
@@ -55,5 +55,4 @@
       </mat-grid-tile>
     </ng-container>
   </mat-grid-list>
-  <mat-paginator [length]="totalCards" [pageSize]="pageSize" [pageSizeOptions]="[10, 20, 50]" (page)="onPageChange($event)"></mat-paginator>
 </div>
