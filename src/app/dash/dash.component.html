@@ -14,7 +14,7 @@
     <ng-container *ngFor="let card of cards | async">
       <mat-grid-tile [colspan]="card.cols" [rowspan]="card.rows">
         <div class="card-container">
-            <mat-card *ngIf="!card.flip" class="dashboard-card" (click)="toggleFlip(card)">
+            <mat-card *ngIf="!card.flip" class="dashboard-card" appearance="outlined" (click)="toggleFlip(card)">
               <mat-card-header>
                 <mat-card-title class="pet-name">
                   {{card.name}}
@@ -29,7 +29,7 @@
                 <b>Breed:</b> {{card.breed}}<br>
               </mat-card-content>
             </mat-card>
-            <mat-card *ngIf="card.flip" class="dashboard-card" (click)="toggleFlip(card)">
+            <mat-card *ngIf="card.flip" class="dashboard-card" appearance="outlined" (click)="toggleFlip(card)">
               <mat-card-header>
                 <mat-card-title class="pet-name">
                   {{card.name}}
