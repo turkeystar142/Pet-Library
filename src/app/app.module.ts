@@ -55,7 +55,7 @@ const routes: Routes = [
         BrowserAnimationsModule,
         FormsModule,
         LazyLoadImageModule,
-        RouterModule.forRoot(routes, { useHash: true }),
+        RouterModule.forRoot(routes, { useHash: false }),
         // Material Components
         MatToolbarModule,
         MatButtonModule,
@@ -80,6 +80,5 @@ const routes: Routes = [
         })], 
         providers: [
           provideHttpClient(withInterceptorsFromDi()),
-          { provide: LocationStrategy, useClass: HashLocationStrategy }
         ], })
 export class AppModule { }
