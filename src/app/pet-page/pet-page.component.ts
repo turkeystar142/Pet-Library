@@ -1,6 +1,6 @@
 import { Component, HostListener, inject, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { API_KEY, BASE_URL_SUBMISSION, ADMIN_PASS} from '../app.component';
+import { API_KEY, BASE_URL_SUBMISSION, ADMIN_PASS, API_ENTRIES_URL} from '../app.component';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subscription, map } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -41,7 +41,7 @@ export class PetPageComponent {
   pet = new Observable<Pet | null>;
   subscription = new Subscription;
     // Define the property at the class level
-    COMPILED_URL_SUBMISSION!: string;
+    COMPILED_URL_ENTRY!: string;
     DELETE_URL_SUBMISSION!: string;
   columns: number = 2;
 
@@ -55,35 +55,31 @@ onResize(event: Event) {
 }
 
   ngOnInit() {
-
-    // this.breakpointObserver.observe(Breakpoints.Handset).subscribe(result => {
-    //   this.columns = result.matches ? 1 : 2;
-    // });
     const id = this.activeRoute.snapshot.paramMap.get('id');
     this.petId = id ? id : '';
-    const SUBMISSION_ID = this.petId;
+    // const SUBMISSION_ID = this.petId;
     // Set the Submission URL for API call
-    this.COMPILED_URL_SUBMISSION = BASE_URL_SUBMISSION.concat('/', SUBMISSION_ID, '?apiKey=', API_KEY);;
+    this.COMPILED_URL_ENTRY = API_ENTRIES_URL.concat('/', this.petId);;
 
-    this.http.get<{content: any}>(this.COMPILED_URL_SUBMISSION).subscribe(response => {
+    this.http.get<any>(API_ENTRIES_URL).subscribe(response => {
       const item = response.content;
         const data: Pet = {
-          name: item?.answers?.['23']?.answer ? item?.answers?.['23']?.answer : "N/A", // '23' is the key for the 'Pet Name 1' question
-          name2: item?.answers?.['24']?.answer ? item?.answers?.['24']?.answer : "N/A", // '24' is the key for the 'Pet Name 2' question
-          pet_type: item?.answers?.['7']?.answer ? item?.answers?.['7']?.answer : "N/A", // '7' is the key for the 'Pet Type' question
-          pet_type2: item?.answers?.['13']?.answer ? item?.answers?.['13']?.answer : "N/A", // '13' is the key for the 'Pet Type 2' question
-          breed: item?.answers?.['9']?.answer ? item?.answers?.['9']?.answer : "N/A", // '9' is the key for the 'Breed' question
-          breed2: item?.answers?.['14']?.answer ? item?.answers?.['14']?.answer : "N/A", // '14' is the key for the 'Breed2' question
-          pet_color: item?.answers?.['20']?.answer ? item?.answers?.['20']?.answer : "N/A", // '20' is the key for the 'Pet Color' question
-          pet_color2: item?.answers?.['21']?.answer ? item?.answers?.['21']?.answer : "N/A", // '21' is the key for the 'Pet Color2' question
-          owner_name: item?.answers?.['4']?.prettyFormat ? item?.answers?.['4']?.prettyFormat : "N/A", // '4' is the key for the 'Owner\'s Name' question
-          id: item?.id ? item?.id : "0", // 
-          location: item?.answers?.['3']?.prettyFormat ? item?.answers?.['3']?.prettyFormat : (item?.answers?.['26']?.answer ? item?.answers?.['26']?.answer + " " + item?.answers?.['28']?.answer : "N/A"), // '3' is the key for the 'Location' question
-          pet_photo: item?.answers?.['19']?.answer[0], // '19' is the key for the 'photo' question
-          pet_photo2: item?.answers?.['19']?.answer[1], // '19.2' is the key for the 'photo2' question
-          pet_photo3: item?.answers?.['19']?.answer[2], // '19.2' is the key for the 'photo' question
-          email: item?.answers?.['5']?.answer ? item?.answers?.['5']?.answer : "N/A", // '5' is the key for the 'Email' question
-          phone: item?.answers?.['6']?.prettyFormat ? item?.answers?.['6']?.prettyFormat : "N/A", // '6' is the key for the 'Phone' question
+          name:  item['Pet Name'] || 'N/A',
+          name2: '',
+          pet_type: item['Pet Type'] || 'N/A',
+          pet_type2: '',
+          breed: item['Pet Breed'] || 'N/A',
+          breed2: '',
+          pet_color: item['Pet Color'] || 'N/A',
+          pet_color2: '',
+          owner_name: item['Owner Full Name'] || 'N/A',
+          id: item['ID'] || '0',
+          location: (item['Development'] || '') + ' ' + (item['Unit'] || ''),
+          pet_photo: item['Photo'] || '',
+          pet_photo2: '',
+          pet_photo3: '',
+          email: item['Email'] || 'N/A',
+          phone: item['Phone Number'] || 'N/A',
         };
         this.dataSubject.next(data);
       });
