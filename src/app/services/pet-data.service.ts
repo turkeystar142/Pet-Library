@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of} from 'rxjs';
-import { shareReplay, tap } from 'rxjs/operators';
+import { shareReplay, map, tap } from 'rxjs/operators';
 import { API_ENTRIES_URL } from '../app.component';
 
 export interface PetEntry {
@@ -61,12 +61,9 @@ export class PetDataService {
 
   /** Get a single entry by ID (fetches if needed*/
   getEntryById(id: string): Observable<PetEntry | undefined> {
-    return new Observable(observer => {
-      this.getEntries().subscribe(entries => {
-        observer.next(entries.find(e => e.ID === id));
-        observer.complete();
-      });
-    });
+    return this.getEntries().pipe(
+        map(entries => entries.find(e => String(e.ID) === String(id)))
+      );
   }
 
   /** Optional: clear cache and local storage manually */

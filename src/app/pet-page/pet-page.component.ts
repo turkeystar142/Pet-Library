@@ -47,17 +47,21 @@ onResize(event: Event) {
     this.petId = id ? id : '';
 
     this.petDataService.getEntryById(this.petId).subscribe(response => {
+      if (!response) {
+        console.warn('No pet found for ID:', this.petId);
+        return;
+      }
         const data: Pet = {
-          name: response?.['Pet Name'] || 'N/A',
-          pet_type: response?.['Pet Type'] || 'N/A',
-          breed: response?.['Pet Breed'] || 'N/A',
-          pet_color: response?.['Pet Color'] || 'N/A',
-          owner_name: response?.['Owner Full Name'] || 'N/A',
-          id: response?.['ID'] || '0',
-          location: (response?.['Development'] || '') + ' ' + (response?.['Unit'] || ''),
-          pet_photo: response?.['Photo'] || '',
-          email: response?.['Email'] || 'N/A',
-          phone: response?.['Phone Number'] || 'N/A',
+          name: response['Pet Name'] || 'N/A',
+          pet_type: response['Pet Type'] || 'N/A',
+          breed: response['Pet Breed'] || 'N/A',
+          pet_color: response['Pet Color'] || 'N/A',
+          owner_name: response['Owner Full Name'] || 'N/A',
+          id: response['ID'] || '0',
+          location: (response['Development'] || '') + ' ' + (response?.['Unit'] || ''),
+          pet_photo: response['Photo'] || '',
+          email: response['Email'] || 'N/A',
+          phone: response['Phone Number'] || 'N/A',
         };
         this.dataSubject.next(data);
       });
