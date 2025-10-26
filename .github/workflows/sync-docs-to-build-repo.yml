@@ -3,7 +3,7 @@ name: Sync docs/browser to build repo for cpanel
 on:
   push:
     branches:
-      - master  # or your desired branch
+      - master
 
 jobs:
   sync:
@@ -15,23 +15,34 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Prepare files
-        run: |
-          mkdir -p /tmp/export
-          cp -R docs/browser/* /tmp/export/
-
-      - name: Push to destination repo
+      - name: Clone destination repo (B)
         env:
           DEST_REPO: turkeystar142/pet-library-build
           DEST_BRANCH: main
           GH_TOKEN: ${{ secrets.DEST_REPO_TOKEN }}
         run: |
-          cd /tmp/export
-          git init
+          git clone --depth=1 -b $DEST_BRANCH https://${GH_TOKEN}@github.com/${DEST_REPO}.git dest-repo
+
+      - name: Remove everything except images folder
+        run: |
+          cd dest-repo
+          shopt -s extglob
+          rm -rf !(images)
+          cd ..
+
+      - name: Copy new docs content
+        run: |
+          rsync -av --delete ../docs/browser/ dest-repo/
+
+      - name: Commit and push changes
+        env:
+          GH_TOKEN: ${{ secrets.DEST_REPO_TOKEN }}
+          DEST_REPO: turkeystar142/pet-library-build
+          DEST_BRANCH: main
+        run: |
+          cd dest-repo
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Sync from repoA@${{ github.sha }}"
-          git branch -M $DEST_BRANCH
-          git remote add dest https://${{ env.GH_TOKEN }}@github.com/${{ env.DEST_REPO }}.git
-          git push -f dest $DEST_BRANCH
+          git diff --quiet && git diff --staged --quiet || git commit -m "Sync docs/browser from repoA@${{ github.sha }}"
+          git push https://${GH_TOKEN}@github.com/${DEST_REPO}.git $DEST_BRANCH
