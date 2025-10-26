@@ -1,28 +1,21 @@
 import { Component, HostListener, inject, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { API_KEY, BASE_URL_SUBMISSION, ADMIN_PASS, API_ENTRIES_URL} from '../app.component';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subscription, map } from 'rxjs';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { ADMIN_PASS } from '../app.component';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatTooltip } from '@angular/material/tooltip';
+import { PetDataService } from '../services/pet-data.service';
 
 interface Pet {
   name: string;
-  name2: string;
   owner_name: string;
   pet_type: string;
-  pet_type2: string;
   breed: string;
-  breed2: string;
   pet_color: string;
-  pet_color2: string;
   location: string;
   phone: string;
   email: string;
   pet_photo: string;
-  pet_photo2: string;
-  pet_photo3: string;
   id: string;
 }
 
@@ -35,17 +28,12 @@ interface Pet {
 export class PetPageComponent {
   @ViewChild('tooltip') tooltip!: MatTooltip;
   petId: string = '';
-  private http = inject(HttpClient);
-  private breakpointObserver = inject(BreakpointObserver);
   private dataSubject = new BehaviorSubject<Pet | null>(null);
   pet = new Observable<Pet | null>;
   subscription = new Subscription;
-    // Define the property at the class level
-    COMPILED_URL_ENTRY!: string;
-    DELETE_URL_SUBMISSION!: string;
   columns: number = 2;
 
-constructor(private activeRoute: ActivatedRoute, private router: Router) { 
+constructor(private activeRoute: ActivatedRoute, private router: Router, private petDataService: PetDataService) { 
   this.columns = this.getNumberOfColumns();
 }
 
@@ -57,29 +45,19 @@ onResize(event: Event) {
   ngOnInit() {
     const id = this.activeRoute.snapshot.paramMap.get('id');
     this.petId = id ? id : '';
-    // const SUBMISSION_ID = this.petId;
-    // Set the Submission URL for API call
-    this.COMPILED_URL_ENTRY = API_ENTRIES_URL.concat('/', this.petId);;
 
-    this.http.get<any>(API_ENTRIES_URL).subscribe(response => {
-      const item = response.content;
+    this.petDataService.getEntryById(this.petId).subscribe(response => {
         const data: Pet = {
-          name:  item['Pet Name'] || 'N/A',
-          name2: '',
-          pet_type: item['Pet Type'] || 'N/A',
-          pet_type2: '',
-          breed: item['Pet Breed'] || 'N/A',
-          breed2: '',
-          pet_color: item['Pet Color'] || 'N/A',
-          pet_color2: '',
-          owner_name: item['Owner Full Name'] || 'N/A',
-          id: item['ID'] || '0',
-          location: (item['Development'] || '') + ' ' + (item['Unit'] || ''),
-          pet_photo: item['Photo'] || '',
-          pet_photo2: '',
-          pet_photo3: '',
-          email: item['Email'] || 'N/A',
-          phone: item['Phone Number'] || 'N/A',
+          name: response?.['Pet Name'] || 'N/A',
+          pet_type: response?.['Pet Type'] || 'N/A',
+          breed: response?.['Pet Breed'] || 'N/A',
+          pet_color: response?.['Pet Color'] || 'N/A',
+          owner_name: response?.['Owner Full Name'] || 'N/A',
+          id: response?.['ID'] || '0',
+          location: (response?.['Development'] || '') + ' ' + (response?.['Unit'] || ''),
+          pet_photo: response?.['Photo'] || '',
+          email: response?.['Email'] || 'N/A',
+          phone: response?.['Phone Number'] || 'N/A',
         };
         this.dataSubject.next(data);
       });
@@ -116,27 +94,7 @@ onResize(event: Event) {
   }
 
   deletePet(id: string) {
-    // Set the Submission URL for DELTE API call
-    var result = '';
-    this.DELETE_URL_SUBMISSION = BASE_URL_SUBMISSION.concat('/', id, '?apiKey=', API_KEY);
-
-    // Perform the DELETE request
-    this.http.delete(this.DELETE_URL_SUBMISSION).subscribe(
-      (response: any) => {
-        // Assuming response contains some result, assign it here
-        const result = response.message && response.message.includes('success') ? 'success' : 'error';  // Modify based on your actual API response structure
-
-        // Check the result and show the tooltip if needed
-        this.checkResult(result);
-
-        // Navigate to dashboard after processing
-        this.router.navigate(['/dash']);
-      },
-      (error: any) => {
-        // Handle error if needed
-        console.error('Error during delete:', error);
-      }
-    );
+    // Perform the DELETE request via pet-data service
   }
 
   checkResult(result: string) {

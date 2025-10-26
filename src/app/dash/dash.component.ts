@@ -1,28 +1,21 @@
 import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { API_ENTRIES_URL, API_KEY, BASE_URL_SUBMISSION, COMPILED_URL} from '../app.component';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
+import { PetDataService } from '../services/pet-data.service'; 
 
 interface Card {
   name: string;
-  name2: string;
   owner_name: string;
   pet_type: string;
-  pet_type2: string;
   breed: string;
-  breed2: string;
   pet_color: string;
-  pet_color2: string;
   location: string;
   phone: string;
   email: string;
   pet_photo: string;
-  pet_photo2: string;
-  pet_photo3: string;
   id: string;
   cols: number;
   rows: number;
@@ -37,7 +30,6 @@ interface Card {
 })
 export class DashComponent implements OnInit {
   private breakpointObserver = inject(BreakpointObserver);
-  private http = inject(HttpClient);
   private dataSubject = new BehaviorSubject<Card[]>([]);
   private pageIndex = new BehaviorSubject<number>(0);
   searchTerm: BehaviorSubject<string>  = new BehaviorSubject<string>('');
@@ -50,7 +42,7 @@ export class DashComponent implements OnInit {
   isLoading = true;
   ADD_URL_SUBMISSION!: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private petDataService: PetDataService) {
     this.columns = this.getNumberOfColumns();
   }
 
@@ -60,22 +52,16 @@ export class DashComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get<any[]>(API_ENTRIES_URL).subscribe(entries => {
+    this.petDataService.getEntries().subscribe(entries => {
       const data = entries.map(item => ({
         name: item['Pet Name'] || 'N/A',
-        name2: '', // no second pet in new table
         pet_type: item['Pet Type'] || 'N/A',
-        pet_type2: '',
         breed: item['Pet Breed'] || 'N/A',
-        breed2: '',
         pet_color: item['Pet Color'] || 'N/A',
-        pet_color2: '',
         owner_name: item['Owner Full Name'] || 'N/A',
         id: item['ID'] || '0',
         location: (item['Development'] || '') + ' ' + (item['Unit'] || ''),
         pet_photo: item['Photo'] || '',
-        pet_photo2: '',
-        pet_photo3: '',
         email: item['Email'] || 'N/A',
         phone: item['Phone Number'] || 'N/A',
         cols: 1,
@@ -99,14 +85,10 @@ export class DashComponent implements OnInit {
         // Filter cards based on the search term
         filteredCards = filteredCards.filter(card =>
           card.name.toLowerCase().includes(searchTermLower) ||
-          card.name2.toLowerCase().includes(searchTermLower) ||
           card.breed.toLowerCase().includes(searchTermLower) ||
-          card.breed2.toLowerCase().includes(searchTermLower) ||
           card.owner_name.toLowerCase().includes(searchTermLower) ||
           card.pet_color.toLowerCase().includes(searchTermLower) ||
-          card.pet_color2.toLowerCase().includes(searchTermLower) ||
           card.pet_type.toLowerCase().includes(searchTermLower) ||
-          card.pet_type2.toLowerCase().includes(searchTermLower) ||
           card.phone.toLowerCase().includes(searchTermLower) ||
           card.location.toLowerCase().includes(searchTermLower)
         );
