@@ -32,7 +32,7 @@ jobs:
 
       - name: Copy new docs content
         run: |
-          rsync -av --delete ../docs/browser/ dest-repo/
+          rsync -av --delete docs/browser/ dest-repo/
 
       - name: Commit and push changes
         env:
