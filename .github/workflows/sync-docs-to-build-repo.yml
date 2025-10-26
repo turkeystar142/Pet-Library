@@ -45,4 +45,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git diff --quiet && git diff --staged --quiet || git commit -m "Sync docs/browser from repoA@${{ github.sha }}"
+          git branch -M $DEST_BRANCH
           git push https://${GH_TOKEN}@github.com/${DEST_REPO}.git $DEST_BRANCH
