@@ -13,6 +13,8 @@ jobs:
       - name: Checkout source repo (A)
         uses: actions/checkout@v4
         with:
+          repository: turkeystar142/Pet-Library
+          token: ${{ secrets.SECRET_PAT }}
           fetch-depth: 0
 
       - name: Clone destination repo (B)
