@@ -30,7 +30,11 @@ jobs:
           ls -la docs/browser/ || echo "docs/browser/ not found!"
           echo "Destination directory before copy:"
           ls -la dest-repo/ || echo "dest-repo/ not found!"
-          rsync -av --delete docs/browser/ dest-repo/
+          # Use rsync but exclude .git and preserve images folder
+          rsync -av --delete \
+            --exclude='.git' \
+            --exclude='images' \
+            docs/browser/ dest-repo/
           echo "Destination directory after copy:"
           ls -la dest-repo/
 
@@ -39,6 +43,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Verify and set correct remote
+          echo "Current remotes:"
+          git remote -v
+          git remote set-url origin https://x-access-token:${{ secrets.DEST_REPO_TOKEN }}@github.com/turkeystar142/pet-library-build.git
+          echo "Updated remote:"
+          git remote -v
+          # Switch to main branch if not already on it
+          git checkout main || git checkout -b main
           git status
           git add .
           git status
@@ -48,7 +60,10 @@ jobs:
           else
             echo "Committing changes..."
             git commit -m "Sync docs/browser from repoA@${{ github.sha }}"
+            echo "Fetching latest changes from origin..."
+            git fetch origin main
             echo "Pushing to origin..."
-            git push origin HEAD:main
+            # Use force-with-lease to handle any remote changes safely
+            git push origin main || git push --force-with-lease origin main
             echo "Changes pushed successfully"
           fi
