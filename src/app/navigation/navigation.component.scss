@@ -17,7 +17,18 @@
 }
 
 .toolbar-title {
-  justify-content: center;
+  justify-content: space-between;
   position: fixed;
   z-index: 10;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-info {
+  margin-right: 16px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 }

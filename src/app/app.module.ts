@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -27,17 +27,32 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { PetPageComponent } from './pet-page/pet-page.component'; 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+// Authentication
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 // Routing Definitions
 const routes: Routes = [
-  { path: 'dash', component: DashComponent },
-  { path: 'table', component: TableComponent },
-  { path: 'pet/:id', component: PetPageComponent },
-  { path: '', redirectTo: '/dash', pathMatch: 'full' }, // redirect empty path to '/dash'
-  { path: '**', redirectTo: '/dash' }, // wildcard route back home
+  { 
+    path: '', 
+    component: NavigationComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'dash', component: DashComponent },
+      { path: 'table', component: TableComponent },
+      { path: 'pet/:id', component: PetPageComponent },
+      { path: '', redirectTo: '/dash', pathMatch: 'full' },
+    ]
+  },
+  { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: '/dash' }, // wildcard route redirects to dash
   // more routes here
 ];
 
@@ -46,7 +61,8 @@ const routes: Routes = [
         NavigationComponent,
         TableComponent,
         DashComponent,
-        PetPageComponent
+        PetPageComponent,
+        LoginComponent
     ],
     exports: [RouterModule],
     bootstrap: [AppComponent], 
@@ -54,6 +70,7 @@ const routes: Routes = [
         AppRoutingModule,
         BrowserAnimationsModule,
         FormsModule,
+        ReactiveFormsModule,
         LazyLoadImageModule,
         RouterModule.forRoot(routes, { useHash: false }),
         // Material Components
@@ -70,6 +87,7 @@ const routes: Routes = [
         MatCardModule,
         MatMenuModule,
         MatInputModule,
+        MatFormFieldModule,
         MatTooltip,
         // Service Worker for Cache
         ServiceWorkerModule.register('ngsw-worker.js', {
@@ -80,5 +98,12 @@ const routes: Routes = [
         })], 
         providers: [
           provideHttpClient(withInterceptorsFromDi()),
+          {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+          },
+          AuthGuard,
+          AdminGuard
         ], })
 export class AppModule { }

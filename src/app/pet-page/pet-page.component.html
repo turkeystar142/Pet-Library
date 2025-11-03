@@ -19,6 +19,7 @@
           <mat-card-header>
             <mat-card-title>Pet Information:</mat-card-title>
             <button mat-fab matTooltip="Delete Pet" class="delete-button" color="accent" (click)="verifyAdmin(petId)"
+            *ngIf="isAdmin"
             #tooltip="matTooltip"><mat-icon>delete_forever</mat-icon></button>
           </mat-card-header>
           <mat-card-content class="mat-body-1">

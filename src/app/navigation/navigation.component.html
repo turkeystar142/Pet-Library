@@ -19,6 +19,13 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button> -->
       <span>{{title}}</span>
+      <span class="spacer"></span>
+      <span class="user-info" *ngIf="currentUser$ | async as user">
+        {{ user.username }} ({{ user.role === 'admin' ? 'Admin' : 'User' }})
+      </span>
+      <button mat-icon-button (click)="logout()" matTooltip="Logout" aria-label="Logout">
+        <mat-icon>logout</mat-icon>
+      </button>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

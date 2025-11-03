@@ -1,5 +1,7 @@
 import { Component} from '@angular/core';
 import { LayoutService } from '../layout.service';
+import { AuthService, User } from '../services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-navigation',
@@ -18,6 +20,21 @@ export class NavigationComponent {
       // Add more items as needed
     ];
 
-    constructor(public layoutService: LayoutService) { }
+    currentUser$: Observable<User | null>;
+
+    constructor(
+      public layoutService: LayoutService,
+      private authService: AuthService
+    ) {
+      this.currentUser$ = this.authService.currentUser$;
+    }
+
+    logout(): void {
+      this.authService.logout();
+    }
+
+    get isAdmin(): boolean {
+      return this.authService.isAdmin();
+    }
 
 }

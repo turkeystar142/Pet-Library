@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatTooltip } from '@angular/material/tooltip';
 import { PetDataService } from '../services/pet-data.service';
+import { AuthService } from '../services/auth.service';
 
 interface Pet {
   name: string;
@@ -33,7 +34,12 @@ export class PetPageComponent {
   subscription = new Subscription;
   columns: number = 2;
 
-constructor(private activeRoute: ActivatedRoute, private router: Router, private petDataService: PetDataService) { 
+constructor(
+  private activeRoute: ActivatedRoute, 
+  private router: Router, 
+  private petDataService: PetDataService,
+  private authService: AuthService
+) { 
   this.columns = this.getNumberOfColumns();
 }
 
@@ -76,6 +82,10 @@ onResize(event: Event) {
     else  {
       return 2;
     }
+  }
+
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
   }
 
   goBack() {
