@@ -63,3 +63,16 @@
 .photo-card {
   text-align: center;
 }
+
+::ng-deep .dashboard-card .mat-card-header {
+  background-color: lightblue;
+  margin: -16px -16px 16px -16px;
+  padding: 12px 16px;
+  border-radius: 4px 4px 0 0;
+}
+
+::ng-deep .dashboard-card .mat-card-title {
+  margin-bottom: 0;
+  color: #000;
+  font-weight: 500;
+}
