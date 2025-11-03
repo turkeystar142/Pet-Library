@@ -1,0 +1,63 @@
+{
+  "configVersion": 1,
+  "timestamp": 1762153581580,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main-YRGMXWKP.js",
+        "/polyfills-FFHMD2TL.js",
+        "/styles-EX6S6SN3.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/image-404.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/image-404.png": "ca5c6c34a966bf8a491cae4f7f46c7aed136abc5",
+    "/favicon.ico": "0afb4142f19b766925fdb6f1120dd74f99b4b48d",
+    "/index.html": "d40712d44917002b82df05e948b8a9627b47afc0",
+    "/main-YRGMXWKP.js": "b3ae2eac2515c98d5fccba594f9295c4f2c4cc6b",
+    "/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
+    "/styles-EX6S6SN3.css": "28569da238a6e30edaf5be3e6d36385a9c342655"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
