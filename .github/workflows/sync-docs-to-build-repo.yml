@@ -34,6 +34,7 @@ jobs:
           rsync -av --delete \
             --exclude='.git' \
             --exclude='images' \
+            --exclude='.github' \
             docs/browser/ dest-repo/
           echo "Destination directory after copy:"
           ls -la dest-repo/
