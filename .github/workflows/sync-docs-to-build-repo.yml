@@ -26,13 +26,29 @@ jobs:
 
       - name: Copy new docs content
         run: |
+          echo "Source directory contents:"
+          ls -la docs/browser/ || echo "docs/browser/ not found!"
+          echo "Destination directory before copy:"
+          ls -la dest-repo/ || echo "dest-repo/ not found!"
           rsync -av --delete docs/browser/ dest-repo/
+          echo "Destination directory after copy:"
+          ls -la dest-repo/
 
       - name: Commit and push changes
         working-directory: dest-repo
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git status
           git add .
-          git diff --quiet && git diff --staged --quiet || git commit -m "Sync docs/browser from repoA@${{ github.sha }}"
-          git push origin HEAD:main
+          git status
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit - everything up to date"
+          else
+            echo "Committing changes..."
+            git commit -m "Sync docs/browser from repoA@${{ github.sha }}"
+            echo "Pushing to origin..."
+            git push origin HEAD:main
+            echo "Changes pushed successfully"
+          fi
