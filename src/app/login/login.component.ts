@@ -52,7 +52,16 @@ export class LoginComponent {
         },
         error: (error) => {
           // Handle login error
-          this.errorMessage = error?.error?.error || 'Invalid username or password';
+          console.error('Login error:', error);
+          if (error?.error?.error) {
+            this.errorMessage = error.error.error;
+          } else if (error?.error?.message) {
+            this.errorMessage = error.error.message;
+          } else if (error?.message) {
+            this.errorMessage = error.message;
+          } else {
+            this.errorMessage = 'Invalid username or password';
+          }
           this.isLoading = false;
         }
       });
